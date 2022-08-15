@@ -31,12 +31,12 @@ gem 'rollbar'
 gem 'simple_form'
 gem 'slim'
 gem 'slim-rails'
+gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'omniauth-github'
-  gem 'omniauth-rails_csrf_protection'
   gem 'rails-i18n', '~> 6.0'
   gem 'rubocop-rails'
   gem 'slimcop'
