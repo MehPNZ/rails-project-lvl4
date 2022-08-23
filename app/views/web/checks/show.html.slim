@@ -1,0 +1,37 @@
+.mb-3.mt-3 = link_to "Go to repository", repository_path(@repository), class: 'btn btn-primary'
+
+h1 = "Check# #{@check.id}"
+
+table.table
+  tbody
+    tr
+      td = 'Created at'
+      td = @check.created_at
+    tr
+      td = 'Status'
+      td = @check.status
+    tr
+      td = 'Check passed'
+      td = @check.check_passed
+    tr
+      td = 'Issues count'
+      td = @check.issues_count
+
+table.table.table-hover.mb-5
+  thead
+    tr
+      th{ scope: :col } = 'Message'
+      th{ scope: :col } = 'Rule'
+      th{ scope: :col } = 'Line column'
+      th
+
+  tbody
+    - @report.each do |r|
+      tr
+        <td colspan="3">
+          = link_to r['filePath'], "https://github.com/"
+      - r['messages'].each do |m|
+        tr
+          td = m['message']
+          td = m['ruleId']
+          td = "#{m['line']}:#{m['column']}"

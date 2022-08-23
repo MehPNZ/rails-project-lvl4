@@ -1,0 +1,22 @@
+- content_for :title do
+  = 'Repositories'
+
+.mb-3 = link_to "New", new_repository_path, class: 'btn btn-primary'
+
+table.table.table-striped.table-hover.mb-5
+  thead
+    tr
+      th{ scope: :col } = 'Name'
+      th{ scope: :col } = 'language'
+      th{ scope: :col } = 'Last check passed'
+      th
+
+  tbody
+    - @repositories.each do |repository|
+      tr
+        td = link_to repository_path(repository) do
+          = repository.repo_name
+        td = repository.language
+        td = repository.checks.last&.check_passed
+        td
+

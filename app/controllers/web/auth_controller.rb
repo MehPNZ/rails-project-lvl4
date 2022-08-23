@@ -6,10 +6,13 @@ class Web::AuthController < Web::ApplicationController
     nickname = auth[:info][:nickname]
     token = auth[:credentials][:token]
 
+    debugger
+
     existing_user = User.find_or_create_by(email: email) do |user|
       user.nickname = nickname
-      user.token = token
     end
+
+    existing_user.update(token: token)
 
     if existing_user
       sign_in existing_user

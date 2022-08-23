@@ -1,0 +1,56 @@
+h1 = @repository.link
+
+div id="progress-bar"
+
+.mb-3.mt-3
+  div.btn-group
+    - if @repository.checks.last&.checking? || @repository.checks.last&.created?
+      = button_to "Check", repository_checks_path(@repository), class: 'btn btn-outline-primary me-2', disabled: true
+      = link_to "Update status", repository_path(@repository.id), class: 'btn btn-outline-success'
+    - else 
+      = link_to "Check", repository_checks_path(@repository), method: :post, class: 'btn btn-outline-primary'
+
+- content_for :title do
+  = @repository.link
+
+p
+  strong.me-2 Name
+  = @repository.repo_name
+p
+  strong.me-2 Language
+  = @repository.language
+p
+  strong.me-2 Created At
+  - if @repository.repo_created_at
+    = l(@repository.repo_created_at, format: :long)
+p
+  strong.me-2 Updated_at
+  - if @repository.repo_updated_at
+    = l(@repository.repo_updated_at, format: :long)
+
+hr
+
+table.table.table-striped.table-hover.mb-5
+  thead
+    tr
+      th = "#"
+      th{ scope: :col } = 'State'
+      th{ scope: :col } = 'Reference'
+      th{ scope: :col } = 'Check passed'
+      th{ scope: :col } = 'Check created_at'
+      th
+
+  tbody
+    - @checks.each do |check|
+      tr
+        - if check.finished?
+          div
+            td = link_to check.id, repository_check_path(@repository, check)
+        - else
+          div
+            td = check.id
+        td = check.status
+        td = link_to check.reference&.split('/')&.last&.to_s&.slice(0,7), check.reference
+        td = check.check_passed
+        td = check.created_at
+        td
