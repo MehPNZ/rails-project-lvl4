@@ -39,6 +39,7 @@ gem 'slim-rails'
 # gem 'sidekiq'
 # gem 'github_webhook', '~> 1.4'
 gem 'pundit'
+gem 'rubocop-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -46,7 +47,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'faker'
   gem 'rails-i18n', '~> 6.0'
-  gem 'rubocop-rails'
+  # gem 'rubocop-rails'
   gem 'slimcop'
   gem 'slim_lint'
   gem 'sqlite3', '~> 1.4'
