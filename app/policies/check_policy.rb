@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RepositoryPolicy < ApplicationPolicy
+class CheckPolicy < ApplicationPolicy
   
   def show?
     @record&.user_id == user&.id
