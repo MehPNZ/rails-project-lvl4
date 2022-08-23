@@ -9,12 +9,13 @@ class RepositoryCheckJob < ApplicationJob
     Open3.capture2("rm -rf #{Rails.root}/tmp/repos/")
     
     check = Check.find(id)
+
     check.to_check! if check.may_to_check?
 
     file = lint_language(check)
-    puts "-------------------------"
-    puts file
-    puts "---------------------------"
+    
+    file.inspect
+    sleep 15
     send("#{check.repository.language}_build", file, check)
 
     check.to_finish! if check.may_to_finish?
