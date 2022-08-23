@@ -1,9 +1,9 @@
 require 'json'
 
-class RepositoryCheckJob# < ApplicationJob
-  include Sidekiq::Job
+class RepositoryCheckJob < ApplicationJob
+  # include Sidekiq::Job
   include CheckJob
-  # queue_as :default
+  queue_as :default
 
   def perform(id)
     Open3.capture2("rm -rf #{Rails.root}/tmp/repos/")

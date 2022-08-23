@@ -7,6 +7,6 @@ class Api::ChecksController < ActionController::Base
     @repository = Repository.find_by(link: params['repository']['full_name'])
     @check = @repository&.checks&.build(reference: params['head_commit']['url'])
     @check.save
-    RepositoryCheckJob.perform_async(@check.id)
+    RepositoryCheckJob.perform_later(@check.id)
   end
 end

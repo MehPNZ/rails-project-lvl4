@@ -8,7 +8,7 @@ class Web::ChecksController < Web::ApplicationController
 
     @check = @repository.checks.build(permitted_params)
     if @check.save
-      RepositoryCheckJob.perform_async(@check.id)
+      RepositoryCheckJob.perform_later(@check.id)
       redirect_to repository_path(@repository), notice: 'Check created!'
     else
       redirect_to repository_path(@repository), notice: 'ERROR: Check not created!'

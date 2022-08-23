@@ -1,7 +1,8 @@
 require "octokit"
 
-class RepositoryLoaderJob
-  include Sidekiq::Job
+class RepositoryLoaderJob < ApplicationJob
+  queue_as :default
+  # include Sidekiq::Job
 
   def perform(id)
     client = Octokit::Client.new access_token: ENV['GITHUB_TOKEN'], auto_paginate: true

@@ -1,4 +1,4 @@
-require 'sidekiq/web'
+# require 'sidekiq/web'
 
 Rails.application.routes.draw do
   root to: 'home#index'
@@ -19,5 +19,5 @@ Rails.application.routes.draw do
     # resource :checks, only: :create, defaults: { formats: :json }
   end
 
-  mount Sidekiq::Web => '/sidekiq'
+  # mount Sidekiq::Web => '/sidekiq'
 end

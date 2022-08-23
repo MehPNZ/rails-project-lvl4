@@ -36,8 +36,8 @@ gem 'rollbar'
 gem 'simple_form'
 gem 'slim'
 gem 'slim-rails'
-gem 'sidekiq'
-gem 'github_webhook', '~> 1.4'
+# gem 'sidekiq'
+# gem 'github_webhook', '~> 1.4'
 gem 'pundit'
 
 group :development, :test do
