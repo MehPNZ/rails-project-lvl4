@@ -12,7 +12,9 @@ class RepositoryCheckJob < ApplicationJob
     check.to_check! if check.may_to_check?
 
     file = lint_language(check)
-
+    puts "-------------------------"
+    puts file
+    puts "---------------------------"
     send("#{check.repository.language}_build", file, check)
 
     check.to_finish! if check.may_to_finish?
