@@ -6,8 +6,6 @@ class Web::AuthController < Web::ApplicationController
     nickname = auth[:info][:nickname]
     token = auth[:credentials][:token]
 
-    debugger
-
     existing_user = User.find_or_create_by(email: email) do |user|
       user.nickname = nickname
     end

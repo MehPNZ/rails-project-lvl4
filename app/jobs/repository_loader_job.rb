@@ -5,7 +5,6 @@ class RepositoryLoaderJob
 
   def perform(id)
     client = Octokit::Client.new access_token: ENV['GITHUB_TOKEN'], auto_paginate: true
-    debugger
     repository = Repository.find(id)
 
     repo = client.repo repository.link
