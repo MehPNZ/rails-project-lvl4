@@ -2,7 +2,8 @@
 
 class RepositoryPolicy < ApplicationPolicy
   def index?
-    @record.empty? ? true : @record.last.user_id == user&.id
+    # @record.empty? ? true : @record.last.user_id == user&.id
+    true
   end
 
   def show?

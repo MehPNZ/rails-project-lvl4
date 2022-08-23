@@ -1,9 +1,8 @@
 class Web::RepositoriesController < Web::ApplicationController
-  after_action :verify_authorized#, except: %i[index]
+  after_action :verify_authorized, except: %i[index]
 
   def index
-    @repositories = Repository.all
-    authorize @repositories
+    @repositories ||= Repository.where(user_id: current_user.id)
   end
 
   def new
