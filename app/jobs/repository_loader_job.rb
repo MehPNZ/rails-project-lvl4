@@ -18,7 +18,6 @@ class RepositoryLoaderJob < ApplicationJob
     }
 
     repository.update(params)
-    debugger
     # client.add_repository_to_app_installation(228494, repo.id)
 
     # Open3.capture2("curl -H \"Authorization: token #{token}\" https://api.github.com/user")
@@ -28,7 +27,7 @@ class RepositoryLoaderJob < ApplicationJob
 end
 
 #app_id = 228494
-curl -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: token ghu_XjLWDp1Evrxltm9TSby4hhrNs2RsGW0Nl1z3" https://api.github.com/user/installations/228494/repositories/502905064
+# curl -X DELETE -H "Accept: application/vnd.github+json" -H "Authorization: token ghu_XjLWDp1Evrxltm9TSby4hhrNs2RsGW0Nl1z3" https://api.github.com/user/installations/228494/repositories/502905064
 
 # # def hook_create(client)
 # #   client.create_hook( repo.full_name, 'web', { url:  ENV['BASE_URL'], content_type: 'json' }, {events: ['push'], active: true, insecure_ssl: '0'})
