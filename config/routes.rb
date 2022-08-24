@@ -1,5 +1,3 @@
-# require 'sidekiq/web'
-
 Rails.application.routes.draw do
   root to: 'home#index'
   scope module: :web do
@@ -16,8 +14,5 @@ Rails.application.routes.draw do
   namespace :api do
 
     post 'checks', to: 'checks#create'
-    # resource :checks, only: :create, defaults: { formats: :json }
   end
-
-  # mount Sidekiq::Web => '/sidekiq'
 end

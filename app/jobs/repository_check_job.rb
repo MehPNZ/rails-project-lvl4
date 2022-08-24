@@ -14,8 +14,6 @@ class RepositoryCheckJob < ApplicationJob
 
     file = lint_language(check)
     
-    file.inspect
-    sleep 15
     send("#{check.repository.language}_build", file, check)
 
     check.to_finish! if check.may_to_finish?

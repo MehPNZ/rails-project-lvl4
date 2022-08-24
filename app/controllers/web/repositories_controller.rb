@@ -17,7 +17,7 @@ class Web::RepositoriesController < Web::ApplicationController
     authorize @repository
     
     if @repository.save
-      RepositoryLoaderJob.perform_later(@repository.id)
+      RepositoryLoaderJob.perform_later(@repository.id, current_user.token)
       redirect_to repositories_path, notice: 'Repository is created.'
     else
       repos_names
