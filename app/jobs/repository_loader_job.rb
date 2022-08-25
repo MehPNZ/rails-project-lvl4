@@ -8,7 +8,7 @@ class RepositoryLoaderJob < ApplicationJob
     repository = Repository.find(id)
 
     repo = client.repo repository.link
-    debugger
+
     params = {
       repo_name: repo.name,
       language: repo.language.downcase,
