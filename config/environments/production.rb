@@ -121,28 +121,18 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
-  config.action_mailer.default_url_options = { host: 'av-github-quality.herokuapp.com' }
-  
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  # user_name: '9fc38750437cf6',
-  # password: '43ae7f8b043e20',
-  # address: 'smtp.mailtrap.io',
-  # domain: 'smtp.mailtrap.io',
-  # port: '2525',
-  # authentication: :cram_md5
-  # }
-
+  config.action_mailer.default_url_options = { host: ENV['HOST'] }
 
   config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'smtp.gmail.com',
-    user_name:            'mikhaylov.av22@gmail.com',
-    password:             'Podzemka84',
-    authentication:       'plain',
+    address: ENV['MAIL_HOST'],
+    port: ENV['SMTP_PORT'] ,
+    user_name:  ENV['MAIL_USERNAME'],
+    password: ENV['MAIL_PASSWORD'],
+    authentication: 'plain',
     enable_starttls_auto: true,
-    open_timeout:         5,
-    read_timeout:         5 }
+    open_timeout: 5,
+    read_timeout: 5 
+  }
 end
