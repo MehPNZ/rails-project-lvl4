@@ -1,7 +1,9 @@
 require 'open3'
 
 class Web::ChecksController < Web::ApplicationController
+  caches_action :show
   after_action :verify_authorized
+  
   def create
     @repository = Repository.find(params[:repository_id])
     authorize @repository

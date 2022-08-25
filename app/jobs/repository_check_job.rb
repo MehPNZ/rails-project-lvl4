@@ -1,7 +1,6 @@
 require 'json'
 
 class RepositoryCheckJob < ApplicationJob
-  # include Sidekiq::Job
   include CheckJob
   queue_as :default
 

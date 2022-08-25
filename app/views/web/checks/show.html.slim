@@ -29,7 +29,8 @@ table.table.table-hover.mb-5
     - @report.each do |r|
       tr
         <td colspan="3">
-          = link_to r['filePath'], "https://github.com/"
+          - file_path = "https://github.com/#{@check.repository.link}/blob/master#{r['filePath'].partition(@check.repository.link).last}"
+          = link_to file_path, file_path
       - r['messages'].each do |m|
         tr
           td = m['message']
