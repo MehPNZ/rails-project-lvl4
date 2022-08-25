@@ -120,4 +120,15 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  config.action_mailer.default_url_options = { host: 'av-github-quality.herokuapp.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  user_name: '9fc38750437cf6',
+  password: '43ae7f8b043e20',
+  address: 'smtp.mailtrap.io',
+  domain: 'smtp.mailtrap.io',
+  port: '2525',
+  authentication: :cram_md5
+  }
 end

@@ -8,7 +8,10 @@ class Web::ChecksController < Web::ApplicationController
 
     @check = @repository.checks.build(permitted_params)
     if @check.save
-      RepositoryCheckJob.perform_later(@check.id)
+
+      # UserMailer.with(user: current_user).check_email.deliver_now
+
+      RepositoryCheckJob.perform_later(@check.id, current_user.email)
       redirect_to repository_path(@repository), notice: 'Check created!'
     else
       redirect_to repository_path(@repository), notice: 'ERROR: Check not created!'
