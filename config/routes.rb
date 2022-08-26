@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root to: 'home#index'
   scope module: :web do
     resources :users
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-
     post 'checks', to: 'checks#create'
   end
 end

@@ -11,8 +11,8 @@ module GithubQuality
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
-    # config.active_job.queue_adapter = :sidekiq 
-    routes.default_url_options = { host: ENV['BASE_URL'] }
+    
+    routes.default_url_options = { host: 'https://f830-82-209-105-42.eu.ngrok.io/api/checks' }
     config.session_store :cookie_store, key: '_interslice_session'
     config.middleware.use ActionDispatch::Cookies # Required for all session management
     config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
