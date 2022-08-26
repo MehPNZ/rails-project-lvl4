@@ -10,11 +10,14 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do
+  scope module: :api do
     scope module: :checks do
       post 'auth/:provider', to: 'auth#request', as: :auth_request
       get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     end
+  end
+
+  namespace :api do
     post 'checks', to: 'checks#create', as: :checks
   end
 end
