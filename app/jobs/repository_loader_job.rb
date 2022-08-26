@@ -1,4 +1,4 @@
-require "octokit"
+require 'octokit'
 
 class RepositoryLoaderJob < ApplicationJob
   queue_as :default
@@ -18,6 +18,6 @@ class RepositoryLoaderJob < ApplicationJob
 
     repository.update(params)
 
-    client.create_hook( repo.full_name, 'web', { url:  ENV['BASE_URL'], content_type: 'json' }, {events: ['push'], active: true, insecure_ssl: 0})
+    client.create_hook(repo.full_name, 'web', { url: ENV.fetch('BASE_URL', nil), content_type: 'json' }, { events: ['push'], active: true, insecure_ssl: 0 })
   end
 end

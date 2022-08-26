@@ -9,7 +9,7 @@ table.table
       td = @check.created_at
     tr
       td = 'Status'
-      td = @check.status
+      td = @check.aasm_state
     tr
       td = 'Check passed'
       td = @check.check_passed

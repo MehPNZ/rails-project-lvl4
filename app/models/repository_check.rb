@@ -3,7 +3,7 @@ class RepositoryCheck < ApplicationRecord
 
   include AASM
 
-  aasm column: 'status' do
+  aasm do
     state :created, initial: true
     state :checking
     state :finished

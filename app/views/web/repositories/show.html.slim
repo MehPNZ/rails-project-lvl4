@@ -52,7 +52,7 @@ table.table.table-striped.table-hover.mb-5
         - else
           div
             td = check.id
-        td = check.status
+        td = check.aasm_state
         td = link_to check.reference&.split('/')&.last&.to_s&.slice(0,7), check.reference
         td = check.check_passed
         td = check.created_at

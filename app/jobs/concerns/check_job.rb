@@ -1,7 +1,7 @@
 module CheckJob
   extend ActiveSupport::Concern
-  
-  SORT_MESSAGES = ['ruleId', 'message', 'line' , 'column']
+
+  SORT_MESSAGES = %w[ruleId message line column]
 
   def commit_reference(check)
     client = Octokit::Client.new
@@ -17,25 +17,27 @@ module CheckJob
     Open3.capture2("git clone #{repo_path} tmp/repos/#{repo_name}")
 
     case check.repository.language
-      when 'javascript'
-        Open3.capture2("rm #{Rails.root}/tmp/repos/#{repo_name}/.eslintrc.yml")
-        Open3.capture2("yarn run eslint --format json -o #{Rails.root}/tmp/repos/#{repo_name}/javascript.json #{Rails.root}/tmp/repos/#{repo_name}/")
-        File.read("#{Rails.root}/tmp/repos/#{repo_name}/javascript.json", encoding: 'utf-8')
-      when 'ruby'
-        Open3.capture2("rubocop --format json --out #{Rails.root}/tmp/repos/#{repo_name}/rubocop.json #{Rails.root}/tmp/repos/#{repo_name}/")
-        File.read("#{Rails.root}/tmp/repos/#{repo_name}/rubocop.json", encoding: 'utf-8')
+    when 'javascript'
+      Open3.capture2("rm #{Rails.root}/tmp/repos/#{repo_name}/.eslintrc.yml")
+      Open3.capture2("yarn run eslint --format json -o #{Rails.root}/tmp/repos/#{repo_name}/javascript.json #{Rails.root}/tmp/repos/#{repo_name}/")
+      File.read("#{Rails.root}/tmp/repos/#{repo_name}/javascript.json", encoding: 'utf-8')
+    when 'ruby'
+      Open3.capture2("rubocop --format json --out #{Rails.root}/tmp/repos/#{repo_name}/rubocop.json #{Rails.root}/tmp/repos/#{repo_name}/")
+      File.read("#{Rails.root}/tmp/repos/#{repo_name}/rubocop.json", encoding: 'utf-8')
     end
   end
 
   def javascript_build(file, check)
     parsed_json = ActiveSupport::JSON.decode(file.chomp)
 
-    report = parsed_json.map{|el| { filePath: el['filePath'], 
-                                    messages: el['messages'].map{|mes| mes.select{|k| SORT_MESSAGES.include?(k)}}}}
-                            .select!{|el| !el[:messages].empty?}
+    report = parsed_json.map do |el|
+               { filePath: el['filePath'],
+                 messages: el['messages'].map { |mes| mes.select { |k| SORT_MESSAGES.include?(k) } } }
+             end
+                        .select! { |el| !el[:messages].empty? }
 
     issues_count = report.inject(0) { |count, el| count += el[:messages].size }
-    
+
     check_update(check, issues_count, report)
   end
 
@@ -43,24 +45,23 @@ module CheckJob
     parsed_json = ActiveSupport::JSON.decode(file.chomp)
     issues_count = parsed_json['summary']['offense_count']
 
-    report = parsed_json['files'].map{|el|
-        {
-          filePath: el['path'],
-          messages: el['offenses'].
-            map do |mes|
-              mes['ruleId'] = mes['cop_name']
-              mes.merge!(mes['location']).select!{|key| SORT_MESSAGES.include?(key)}
-            end
-        }
+    report = parsed_json['files'].map do |el|
+      {
+        filePath: el['path'],
+        messages: el['offenses']
+          .map do |mes|
+            mes['ruleId'] = mes['cop_name']
+            mes.merge!(mes['location']).select! { |key| SORT_MESSAGES.include?(key) }
+          end
       }
+    end
 
-    report.select!{|el| !el[:messages].empty?}
+    report.select! { |el| !el[:messages].empty? }
 
     check_update(check, issues_count, report)
   end
 
   def check_update(check, issues_count, report)
-
     params = {
       issues_count: issues_count,
       check_passed: issues_count == 0,

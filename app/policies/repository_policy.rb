@@ -17,5 +17,4 @@ class RepositoryPolicy < ApplicationPolicy
   def new?
     @record&.user_id == user&.id
   end
-
 end
