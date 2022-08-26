@@ -7,10 +7,10 @@ class RepositoryLoaderJob < ApplicationJob
     client = Octokit::Client.new access_token: token, auto_paginate: true
     repository = Repository.find(id)
 
-    repo = client.repo repository.link
+    repo = client.repo repository.full_name
 
     params = {
-      repo_name: repo.name,
+      name: repo.name,
       language: repo.language.downcase,
       repo_created_at: repo.created_at,
       repo_updated_at: repo.updated_at

@@ -1,4 +1,4 @@
-h1 = @repository.link
+h1 = @repository.full_name
 
 div id="progress-bar"
 
@@ -11,14 +11,14 @@ div id="progress-bar"
       = link_to "Update status", repository_path(@repository.id), class: 'btn btn-outline-success'
     - else
       - flash.clear
-      = link_to "Check", repository_checks_path(@repository), method: :post, class: 'btn btn-outline-primary'
+      = link_to "Check", repository_checks_path(@repository.id), method: :post, class: 'btn btn-outline-primary'
 
 - content_for :title do
-  = @repository.link
+  = @repository.full_name
 
 p
   strong.me-2 Name
-  = @repository.repo_name
+  = @repository.name
 p
   strong.me-2 Language
   = @repository.language

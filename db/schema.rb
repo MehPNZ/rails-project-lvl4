@@ -10,39 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_816_114_257) do
-  create_table 'checks', force: :cascade do |t|
-    t.string 'status'
-    t.boolean 'check_passed'
-    t.integer 'issues_count'
-    t.text 'report'
-    t.string 'reference'
-    t.integer 'repository_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['repository_id'], name: 'index_checks_on_repository_id'
+ActiveRecord::Schema.define(version: 2022_08_16_114257) do
+
+  create_table "checks", force: :cascade do |t|
+    t.string "status"
+    t.boolean "check_passed"
+    t.integer "issues_count"
+    t.text "report"
+    t.string "reference"
+    t.integer "repository_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["repository_id"], name: "index_checks_on_repository_id"
   end
 
-  create_table 'repositories', force: :cascade do |t|
-    t.string 'link'
-    t.string 'repo_name'
-    t.string 'language'
-    t.datetime 'repo_created_at'
-    t.datetime 'repo_updated_at'
-    t.integer 'user_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['user_id'], name: 'index_repositories_on_user_id'
+  create_table "repositories", force: :cascade do |t|
+    t.string "full_name"
+    t.string "name"
+    t.string "language"
+    t.integer "github_id"
+    t.datetime "repo_created_at"
+    t.datetime "repo_updated_at"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'email'
-    t.string 'nickname'
-    t.string 'token'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "nickname"
+    t.string "token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key 'checks', 'repositories'
-  add_foreign_key 'repositories', 'users'
+  add_foreign_key "checks", "repositories"
+  add_foreign_key "repositories", "users"
 end

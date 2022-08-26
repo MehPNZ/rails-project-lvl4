@@ -15,7 +15,7 @@ table.table.table-striped.table-hover.mb-5
     - @repositories.each do |repository|
       tr
         td = link_to repository_path(repository) do
-          = repository.repo_name
+          = repository.name
         td = repository.language
         td = repository.checks.last&.check_passed
         td

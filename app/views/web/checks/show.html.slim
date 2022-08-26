@@ -29,7 +29,7 @@ table.table.table-hover.mb-5
     - @report.each do |r|
       tr
         <td colspan="3">
-          - file_path = "https://github.com/#{@check.repository.link}/blob/master#{r['filePath'].partition(@check.repository.link).last}"
+          - file_path = "https://github.com/#{@check.repository.full_name}/blob/master#{r['filePath'].partition(@check.repository.full_name).last}"
           = link_to file_path, file_path
       - r['messages'].each do |m|
         tr

@@ -46,7 +46,7 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def permitted_params
-    params.require(:repository).permit(:link)
+    params.require(:repository).permit(:full_name)
   end
 end
 
