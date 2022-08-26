@@ -7,7 +7,7 @@ class RepositoryCheckJob < ApplicationJob
   def perform(id)
     Open3.capture2("rm -rf #{Rails.root}/tmp/repos/")
     
-    check = Check.find(id)
+    check = RepositoryCheck.find(id)
 
     check.to_check! if check.may_to_check?
 

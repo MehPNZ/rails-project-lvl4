@@ -1,6 +1,6 @@
-class CreateChecks < ActiveRecord::Migration[6.1]
+class CreateRepositoryChecks < ActiveRecord::Migration[6.1]
   def change
-    create_table :checks do |t|
+    create_table :repository_checks do |t|
       t.string :status
       t.boolean :check_passed
       t.integer :issues_count

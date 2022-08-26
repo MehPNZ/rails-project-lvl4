@@ -12,18 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2022_08_16_114257) do
 
-  create_table "checks", force: :cascade do |t|
-    t.string "status"
-    t.boolean "check_passed"
-    t.integer "issues_count"
-    t.text "report"
-    t.string "reference"
-    t.integer "repository_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["repository_id"], name: "index_checks_on_repository_id"
-  end
-
   create_table "repositories", force: :cascade do |t|
     t.string "full_name"
     t.string "name"
@@ -37,6 +25,18 @@ ActiveRecord::Schema.define(version: 2022_08_16_114257) do
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 
+  create_table "repository_checks", force: :cascade do |t|
+    t.string "status"
+    t.boolean "check_passed"
+    t.integer "issues_count"
+    t.text "report"
+    t.string "reference"
+    t.integer "repository_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["repository_id"], name: "index_repository_checks_on_repository_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "nickname"
@@ -45,6 +45,6 @@ ActiveRecord::Schema.define(version: 2022_08_16_114257) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "checks", "repositories"
   add_foreign_key "repositories", "users"
+  add_foreign_key "repository_checks", "repositories"
 end

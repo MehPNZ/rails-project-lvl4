@@ -24,15 +24,15 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should_create' do
-    link = 'https://github.com/octocat/Hello-World'
+    full_name = 'https://github.com/octocat/Hello-World'
 
     response = JSON.parse(load_fixture('response.json'))
 
     stub_request(:any, 'https://api.github.com/repos/octocat/Hello-World').to_return body: response.to_json, headers: { content_type: 'application/json' }
 
-    post repositories_url, params: { repository: { link: link } }
+    post repositories_url, params: { repository: { full_name: full_name } }
 
-    repository = Repository.find_by! link: link
+    repository = Repository.find_by! full_name: full_name
 
     # assert { repository }
     # assert_redirected_to repositories_path

@@ -1,4 +1,4 @@
-class Check < ApplicationRecord
+class RepositoryCheck < ApplicationRecord
   belongs_to :repository
 
   include AASM

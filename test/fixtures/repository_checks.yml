@@ -2,20 +2,16 @@
 
 one:
   status: MyString
-  check: false
-  issues: 1
-  message: MyText
-  rule: MyString
-  line_column: MyString
+  check_passed: false
+  issues_count: 1
+  report: MyText
   reference: MyString
   repository: one
 
 two:
   status: MyString
-  check: false
-  issues: 1
-  message: MyText
-  rule: MyString
-  line_column: MyString
+  check_passed: false
+  issues_count: 1
+  report: MyText
   reference: MyString
   repository: two
