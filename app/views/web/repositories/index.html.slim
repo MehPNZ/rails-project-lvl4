@@ -17,6 +17,6 @@ table.table.table-striped.table-hover.mb-5
         td = link_to repository_path(repository) do
           = repository.name
         td = repository.language
-        td = repository.checks.last&.check_passed
+        td = repository.checks.last&.passed
         td
 

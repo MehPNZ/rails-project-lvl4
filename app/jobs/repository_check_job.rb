@@ -18,7 +18,7 @@ class RepositoryCheckJob < ApplicationJob
     check.to_finish! if check.may_to_finish?
     Open3.capture2("rm -rf #{Rails.root}/tmp/repos/")
 
-    if !check.check_passed || check.failed?
+    if !check.passed || check.failed?
       UserMailer.with(check: check).check_email.deliver_now
     end
   rescue StandardError

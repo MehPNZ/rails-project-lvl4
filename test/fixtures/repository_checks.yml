@@ -2,7 +2,7 @@
 
 one:
   status: MyString
-  check_passed: false
+  passed: false
   issues_count: 1
   report: MyText
   reference: MyString
@@ -10,7 +10,7 @@ one:
 
 two:
   status: MyString
-  check_passed: false
+  passed: false
   issues_count: 1
   report: MyText
   reference: MyString

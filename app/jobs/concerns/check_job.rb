@@ -64,7 +64,7 @@ module CheckJob
   def check_update(check, issues_count, report)
     params = {
       issues_count: issues_count,
-      check_passed: issues_count == 0,
+      passed: issues_count == 0,
       report: ActiveSupport::JSON.encode(report)
     }
     params[:reference] = commit_reference(check) if check.reference.nil?
