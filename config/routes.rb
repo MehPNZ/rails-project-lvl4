@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :users
 
     post 'auth/:provider', to: 'auth#request', as: :auth_request
-    get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
+    # get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     resource :session, only: :destroy
     resources :repositories do
       resources :checks, only: %i[show create]
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    get 'checks/auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     post 'checks', to: 'checks#create'
   end
 end
