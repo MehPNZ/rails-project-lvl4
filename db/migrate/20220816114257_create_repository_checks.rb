@@ -9,7 +9,7 @@ class CreateRepositoryChecks < ActiveRecord::Migration[6.1]
       t.string :reference
       t.references :repository, null: true, foreign_key: true
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end
