@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2022_08_16_114257) do
     t.integer "issues_count"
     t.text "report"
     t.string "reference"
-    t.integer "repository_id", null: false
+    t.integer "repository_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["repository_id"], name: "index_repository_checks_on_repository_id"

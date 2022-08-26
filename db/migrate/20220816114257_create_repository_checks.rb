@@ -7,7 +7,7 @@ class CreateRepositoryChecks < ActiveRecord::Migration[6.1]
       t.integer :issues_count
       t.text :report
       t.string :reference
-      t.references :repository, null: false, foreign_key: true
+      t.references :repository, null: true, foreign_key: true
 
       t.timestamps
     end
