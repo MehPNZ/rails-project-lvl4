@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api do
+  scope module: :api do
     scope module: :checks do
       get 'checks/auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     end
