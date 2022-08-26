@@ -5,9 +5,12 @@ div id="progress-bar"
 .mb-3.mt-3
   div.btn-group
     - if @repository.checks.last&.checking? || @repository.checks.last&.created?
-      = button_to "Check", repository_checks_path(@repository), class: 'btn btn-outline-primary me-2', disabled: true
+      - flash[:notice] = 'Loading is in progress'
+      div.spinner-border.me-2 role="status"
+        span.visually-hidden Загрузка...
       = link_to "Update status", repository_path(@repository.id), class: 'btn btn-outline-success'
-    - else 
+    - else
+      - flash.clear
       = link_to "Check", repository_checks_path(@repository), method: :post, class: 'btn btn-outline-primary'
 
 - content_for :title do

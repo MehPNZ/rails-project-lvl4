@@ -29,16 +29,18 @@ module CheckJob
 
   def javascript_build(file, check)
     parsed_json = ActiveSupport::JSON.decode(file.chomp)
-    report = parsed_json.each_with_object([]) do |el, item|
-      item << el.select do |key, _value|
-        key == 'filePath' || (key == 'messages' && !el['messages'].empty?)
-      end
-    end
+    # report = parsed_json.each_with_object([]) do |el, item|
+    #   item << el.select do |key, _value|
+    #     key == 'filePath' || (key == 'messages' && !el['messages'].empty?)
+    #   end
+    # end
 
-    report.reject! { |el| !el.key?('messages') }.each{|el| el['messages'].each{|el| el.select!{|k, v| SORT_MESSAGES.include?(k)}}}
+    # report.reject! { |el| !el.key?('messages') }.each{|el| el['messages'].each{|el| el.select!{|k, v| SORT_MESSAGES.include?(k)}}}
+    report = parsed_json.map{|el| { filePath: el['filePath'], 
+                                    messages: el['messages'].map{|mes| mes.select{|k| SORT_MESSAGES.include?(k)}}}}
+                            .select!{|el| !el[:messages].empty?}
 
-    issues_count = report.inject(0) { |count, el| count += el['messages'].size }
-
+    issues_count = report.inject(0) { |count, el| count += el[:messages].size }
     check_update(check, issues_count, report)
   end
 
@@ -46,17 +48,32 @@ module CheckJob
     parsed_json = ActiveSupport::JSON.decode(file.chomp)
     issues_count = parsed_json['summary']['offense_count']
     
-    report = parsed_json['files'].each_with_object([]) do |el, item|
-      item << {
-        'filePath': el.fetch('path'),
-        'messages': el.fetch('offenses').
-          each do |v| 
-            v['ruleId'] = v.fetch('cop_name')
-            v.merge!(v['location']).select!{|key, value| SORT_MESSAGES.include?(key)}
-          end
-        }
-      end
+    #  debugger
+    # report = parsed_json['files'].each_with_object([]) do |el, item|
+    #   item << {
+    #     'filePath': el.fetch('path'),
+    #     'messages': el.fetch('offenses').
+    #       each do |v| 
+    #         v['ruleId'] = v.fetch('cop_name')
+    #         v.merge!(v['location']).select!{|key| SORT_MESSAGES.include?(key)}
+    #       end
+    #     }
+    #   end
       
+    #   report.select!{|el| !el[:messages].empty?}
+
+
+      report = parsed_json['files'].map{|el|
+          {
+            filePath: el['path'],
+            messages: el['offenses'].
+              map do |mes|
+                mes['ruleId'] = mes['cop_name']
+                mes.merge!(mes['location']).select!{|key| SORT_MESSAGES.include?(key)}
+              end
+          }
+        }
+
       report.select!{|el| !el[:messages].empty?}
 
       check_update(check, issues_count, report)

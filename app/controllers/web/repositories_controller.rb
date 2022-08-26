@@ -41,6 +41,8 @@ class Web::RepositoriesController < Web::ApplicationController
     @repos ||= client.repos.each_with_object([]) do |item, array|
       array << item[:full_name] if language_list.include?(item[:language]&.downcase)
     end
+    rescue Octokit::Unauthorized 
+      redirect_to root_path, notice: "Your token has expired. Please re-login"
   end
 
   def permitted_params
