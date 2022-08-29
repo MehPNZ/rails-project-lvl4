@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: make install
 
-      - name: Run Rubocop
+      - name: Run Rubocop --format json --out
         run: make lint
       
       - name: Webpack compilation
