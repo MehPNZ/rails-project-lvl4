@@ -5,15 +5,12 @@ Rails.application.routes.draw do
   scope module: :web do
     resources :users
     resource :session, only: :destroy
+
+    post 'auth/:provider', to: 'auth#request', as: :auth_request
+    get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
+
     resources :repositories do
       resources :checks, only: %i[show create]
-    end
-  end
-
-  scope module: :api do
-    scope module: :checks do
-      post 'auth/:provider', to: 'auth#request', as: :auth_request
-      get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     end
   end
 

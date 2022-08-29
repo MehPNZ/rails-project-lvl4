@@ -40,6 +40,7 @@ gem 'slim-rails'
 # gem 'github_webhook', '~> 1.4'
 gem 'pundit'
 gem 'rubocop-rails'
+gem 'rubocop-performance', require: false
 gem 'actionpack-action_caching'
 
 group :development, :test do
