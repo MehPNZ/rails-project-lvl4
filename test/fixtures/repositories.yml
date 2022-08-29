@@ -5,9 +5,4 @@ one:
   name: MyString
   language: MyString
   user: one
-
-two:
-  full_name: MyString
-  name: MyString
-  language: MyString
-  user: two
+  github_id: one

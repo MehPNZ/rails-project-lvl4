@@ -32,6 +32,7 @@ class ActionDispatch::IntegrationTest
     }
 
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
+
     get callback_auth_url('github')
   end
 

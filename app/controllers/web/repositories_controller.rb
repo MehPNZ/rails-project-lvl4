@@ -2,6 +2,7 @@ class Web::RepositoriesController < Web::ApplicationController
   after_action :verify_authorized, except: %i[index]
 
   def index
+    debugger
     @repositories ||= Repository.where(user_id: current_user.id)
   end
 
