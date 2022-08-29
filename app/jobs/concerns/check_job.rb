@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module CheckJob
   extend ActiveSupport::Concern
 
-  SORT_MESSAGES = %w[ruleId message line column]
+  SORT_MESSAGES = %w[ruleId message line column].freeze
 
   def commit_reference(check)
     client = Octokit::Client.new
@@ -30,13 +32,9 @@ module CheckJob
   def javascript_build(file, check)
     parsed_json = ActiveSupport::JSON.decode(file.chomp)
 
-    report = parsed_json.map do |el|
-               { filePath: el['filePath'],
-                 messages: el['messages'].map { |mes| mes.select { |k| SORT_MESSAGES.include?(k) } } }
-             end
-                        .select! { |el| !el[:messages].empty? }
+    report = parsed_json.map { |el| { filePath: el['filePath'], messages: el['messages'].map { |mes| mes.select { |k| SORT_MESSAGES.include?(k) } } } }.reject! { |el| el[:messages].empty? }
 
-    issues_count = report.inject(0) { |count, el| count += el[:messages].size }
+    issues_count = report.inject(0) { |count, el| count + el[:messages].size }
 
     check_update(check, issues_count, report)
   end
@@ -56,7 +54,7 @@ module CheckJob
       }
     end
 
-    report.select! { |el| !el[:messages].empty? }
+    report.reject! { |el| el[:messages].empty? }
 
     check_update(check, issues_count, report)
   end
@@ -64,7 +62,7 @@ module CheckJob
   def check_update(check, issues_count, report)
     params = {
       issues_count: issues_count,
-      passed: issues_count == 0,
+      passed: issues_count.zero?,
       report: ActiveSupport::JSON.encode(report)
     }
     params[:reference] = commit_reference(check) if check.reference.nil?

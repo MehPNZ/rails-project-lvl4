@@ -2,6 +2,7 @@
 
 require:
   - rubocop-rails
+  - rubocop-performance
 
 AllCops:
   NewCops: enable
@@ -15,6 +16,8 @@ AllCops:
     - 'vendor/**/*'
     - 'node_modules/**/*'
     - 'code/tmp/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'
   SuggestExtensions: false
 
 Rails:
@@ -55,3 +58,17 @@ Metrics/CyclomaticComplexity:
 
 Metrics/PerceivedComplexity:
   Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+

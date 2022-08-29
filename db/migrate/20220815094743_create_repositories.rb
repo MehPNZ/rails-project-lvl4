@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CreateRepositories < ActiveRecord::Migration[6.1]
   def change
     create_table :repositories do |t|
-      t.string :full_name
+      t.string :full_name, index: { unique: true }
       t.string :name
       t.string :language
       t.integer :github_id

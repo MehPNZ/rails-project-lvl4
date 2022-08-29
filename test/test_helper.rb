@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
@@ -28,12 +30,15 @@ class ActionDispatch::IntegrationTest
         email: user.email,
         nickname: user.nickname,
         token: user.token
+      },
+      credentials: {
+        token: user.token
       }
     }
 
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
 
-    get callback_auth_url('github')
+    get callback_auth_path('github')
   end
 
   def signed_in?

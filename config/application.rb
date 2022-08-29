@@ -11,7 +11,6 @@ module GithubQuality
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
-    
     routes.default_url_options = { host: 'https://f830-82-209-105-42.eu.ngrok.io/' }
     config.session_store :cookie_store, key: '_interslice_session'
     config.middleware.use ActionDispatch::Cookies # Required for all session management

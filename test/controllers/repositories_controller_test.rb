@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 require 'test_helper'
+require_relative '../fixtures/files/response_repos'
 
 class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -8,38 +11,48 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get index' do
     sign_in(@user)
-    get repositories_path
+    get repositories_url
     assert_response :success
   end
 
-  # test "should get new" do
-  #   sign_in(@user)
+  test 'should get new' do
+    sign_in(@user)
 
-  #   get new_repository_url
-  #   assert_response :success
-  # end
+    response = ResponseRepos::RESPONSE
 
-  # test 'should get show' do
-  #   get repository_url(@repository)
-  #   assert_response :success
-  # end
+    stub_request(:get, 'https://api.github.com/user/repos?per_page=100').with(headers: {
+                                                                                'Accept' => 'application/vnd.github.v3+json',
+                                                                                'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+                                                                                'Authorization' => 'token qwertyuiopdsasdfghjklfszxcvbnmvd123456',
+                                                                                'Content-Type' => 'application/json',
+                                                                                'User-Agent' => 'Octokit Ruby Gem 4.23.0'
+                                                                              }).to_return(status: 200, body: response, headers: {})
 
-  # test 'should_create' do
-  #   full_name = 'https://github.com/octocat/Hello-World'
+    get new_repository_url
+    assert_response :success
+  end
 
-  #   response = JSON.parse(load_fixture('response.json'))
+  test 'should get show' do
+    sign_in(@user)
+    get repository_url(@repository)
+    assert_response :success
+  end
 
-  #   stub_request(:any, 'https://api.github.com/repos/octocat/Hello-World').to_return body: response.to_json, headers: { content_type: 'application/json' }
+  test 'should_create' do
+    sign_in(@user)
 
-  #   post repositories_url, params: { repository: { full_name: full_name } }
+    full_name = 'https://github.com/octocat/Hello-World'
 
-  #   repository = Repository.find_by! full_name: full_name
+    response = JSON.parse(load_fixture('response.json'))
 
-  #   # assert { repository }
-  #   # assert_redirected_to repositories_path
+    stub_request(:any, 'https://api.github.com/repos/octocat/Hello-World').to_return body: response.to_json, headers: { content_type: 'application/json' }
 
-  #   assert_redirected_to repository_url(repository)
+    post repositories_url, params: { repository: { full_name: full_name } }
 
-  #   assert_enqueued_with job: RepositoryLoaderJob
-  # end
+    repository = Repository.find_by! full_name: full_name
+
+    assert { repository }
+    assert_redirected_to repositories_path
+    assert_enqueued_with job: RepositoryLoaderJob
+  end
 end

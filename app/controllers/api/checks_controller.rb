@@ -1,4 +1,6 @@
-class Api::ChecksController < ActionController::Base
+# frozen_string_literal: true
+
+class Api::ChecksController < ApplicationController
   protect_from_forgery with: :null_session
 
   def create

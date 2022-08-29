@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
   root to: 'home#index'
-  
+
   scope module: :web do
     resources :users
     resource :session, only: :destroy
