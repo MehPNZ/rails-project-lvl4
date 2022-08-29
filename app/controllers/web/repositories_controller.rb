@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Web::RepositoriesController < Web::ApplicationController
+  before_action :authenticate_user!
+  # protect_from_forgery with: :null_session
   after_action :verify_authorized, except: %i[index]
 
   def index

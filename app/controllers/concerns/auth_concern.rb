@@ -19,4 +19,10 @@ module AuthConcern
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
+
+  def authenticate_user!
+    unless user_signed_in? 
+      redirect_to callback_auth_path('github')
+    end
+  end
 end
