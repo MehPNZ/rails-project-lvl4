@@ -2,6 +2,7 @@
 
 class Web::AuthController < Web::ApplicationController
   def callback
+    puts auth
     email = auth[:info][:email].downcase
     nickname = auth[:info][:nickname]
     token = auth[:credentials][:token]

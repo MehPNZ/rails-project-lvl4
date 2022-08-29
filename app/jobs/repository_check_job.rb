@@ -7,7 +7,7 @@ class RepositoryCheckJob < ApplicationJob
   queue_as :default
 
   def perform(id)
-    Open3.capture2("rm -rf #{Rails.root.join('/tmp/repos/')}")
+    Open3.capture2("rm -rf #{Rails.root}/tmp/repos/")
 
     check = RepositoryCheck.find(id)
 
@@ -18,7 +18,7 @@ class RepositoryCheckJob < ApplicationJob
     send("#{check.repository.language}_build", file, check)
 
     check.to_finish! if check.may_to_finish?
-    Open3.capture2("rm -rf #{Rails.root.join('/tmp/repos/')}")
+    Open3.capture2("rm -rf #{Rails.root}/tmp/repos/")
 
     if !check.passed || check.failed?
       UserMailer.with(check: check).check_email.deliver_now
