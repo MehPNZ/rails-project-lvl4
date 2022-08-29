@@ -10,5 +10,7 @@ class Api::ChecksController < ApplicationController
     @check = @repository&.checks&.build(reference: params['head_commit']['url'])
     @check.save
     RepositoryCheckJob.perform_later(@check.id)
+
+    redirect_to repository_path(@repository) 
   end
 end
