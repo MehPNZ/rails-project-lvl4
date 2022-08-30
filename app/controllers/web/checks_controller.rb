@@ -5,11 +5,9 @@ require 'open3'
 class Web::ChecksController < Web::ApplicationController
   before_action :authenticate_user!
   caches_action :show
-  after_action :verify_authorized
 
   def create
     @repository = Repository.find(params[:repository_id])
-    authorize @repository
 
     @check = @repository.checks.build(permitted_params)
     if @check.save
@@ -22,7 +20,6 @@ class Web::ChecksController < Web::ApplicationController
 
   def show
     @repository = Repository.find(params[:repository_id])
-    authorize @repository
     @check ||= RepositoryCheck.find(params[:id])
     @report ||= ActiveSupport::JSON.decode(@check.report)
   end

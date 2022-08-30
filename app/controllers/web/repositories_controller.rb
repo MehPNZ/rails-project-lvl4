@@ -3,22 +3,17 @@
 class Web::RepositoriesController < Web::ApplicationController
   before_action :authenticate_user!
 
-  after_action :verify_authorized, except: %i[index]
-
   def index
     @repositories ||= Repository.where(user_id: current_user.id)
   end
 
   def new
     @repository = current_user&.repositories&.new
-    authorize @repository
     repos_names
   end
 
   def create
     @repository = current_user.repositories.build(permitted_params)
-    authorize @repository
-
     if @repository.save
       RepositoryLoaderJob.perform_later(@repository.id, current_user.token)
       redirect_to repositories_path, notice: 'Repository is created.'
@@ -32,7 +27,6 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def show
     @repository = Repository.find params[:id]
-    authorize @repository
     @checks = @repository.checks.order(created_at: :desc)
   end
 
