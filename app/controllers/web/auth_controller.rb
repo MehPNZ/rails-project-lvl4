@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Web::AuthController < Web::ApplicationController
+
   def callback
     email = auth[:info][:email].downcase
     nickname = auth[:info][:nickname]

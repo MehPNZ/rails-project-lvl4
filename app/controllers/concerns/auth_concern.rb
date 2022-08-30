@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-
+require "net/http"
+require "uri"
 module AuthConcern
   extend ActiveSupport::Concern
 
@@ -21,8 +22,6 @@ module AuthConcern
   end
 
   def authenticate_user!
-    unless user_signed_in? 
-      redirect_to callback_auth_path('github')
-    end
+    redirect_to root_path, notice: "You need to log in" unless user_signed_in?
   end
 end
