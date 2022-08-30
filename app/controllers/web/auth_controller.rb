@@ -3,10 +3,12 @@
 class Web::AuthController < Web::ApplicationController
 
   def callback
+
     email = auth[:info][:email].downcase
     nickname = auth[:info][:nickname]
     token = auth[:credentials][:token]
 
+    
     existing_user = User.find_or_create_by(email: email) do |user|
       user.nickname = nickname
     end
@@ -24,6 +26,7 @@ class Web::AuthController < Web::ApplicationController
   private
 
   def auth
-    request.env['omniauth.auth']
+    auth = ApplicationContainer[:auth]
+    auth.request_omniauth(request.env['omniauth.auth'])
   end
 end

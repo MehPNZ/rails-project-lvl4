@@ -353,7 +353,6 @@ DEPENDENCIES
   dry-container (~> 0.7.1)
   enumerize
   faker
-  faraday
   jbuilder (~> 2.7)
   listen (~> 3.3)
   minitest-power_assert

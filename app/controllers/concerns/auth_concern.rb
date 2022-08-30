@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require "net/http"
-require "uri"
 module AuthConcern
   extend ActiveSupport::Concern
 

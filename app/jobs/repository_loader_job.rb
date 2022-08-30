@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
-require 'octokit'
-
 class RepositoryLoaderJob < ApplicationJob
   queue_as :default
 
   def perform(id, token)
-    client = Octokit::Client.new access_token: token, auto_paginate: true
+    repository_loader = ApplicationContainer[:repository_loader]
+
+    client = repository_loader.octokit_client(token)
+
     repository = Repository.find(id)
 
-    repo = client.repo repository.full_name
+    repo = repository_loader.get_repo(client, repository)
 
     params = {
       name: repo.name,
@@ -20,6 +21,6 @@ class RepositoryLoaderJob < ApplicationJob
 
     repository.update(params)
 
-    client.create_hook(repo.full_name, 'web', { url: ENV.fetch('BASE_URL', nil), content_type: 'json' }, { events: ['push'], active: true, insecure_ssl: 0 })
+    repository_loader.create_hook(client, repo)
   end
 end

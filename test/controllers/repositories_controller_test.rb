@@ -17,25 +17,13 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get new' do
     sign_in(@user)
-
-    response = ResponseRepos::RESPONSE
-
-    stub_request(:get, 'https://api.github.com/user/repos?per_page=100').with(headers: {
-                                                                                'Accept' => 'application/vnd.github.v3+json',
-                                                                                'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-                                                                                'Authorization' => 'token qwertyuiopdsasdfghjklfszxcvbnmvd123456',
-                                                                                'Content-Type' => 'application/json',
-                                                                                'User-Agent' => 'Octokit Ruby Gem 4.23.0'
-                                                                              }).to_return(status: 200, body: response, headers: {})
-
     get new_repository_url
     assert_response :success
   end
 
   test 'should get show' do
-    sign_in(@user)
     get repository_url(@repository)
-    assert_response :success
+    assert_response :found
   end
 
   test 'should_create' do

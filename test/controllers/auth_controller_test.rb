@@ -13,18 +13,16 @@ class Web::AuthControllerTest < ActionDispatch::IntegrationTest
       provider: 'github',
       uid: '12345',
       info: {
-        email: Faker::Internet.email,
-        nickname: Faker::Name.first_name
+        email: "test@test.test",
+        nickname: "Testovich"
       },
       credentials: {
         token: 'qwertyuiopdsasdfghjklfszxcvbnmvd123456'
       }
     }
 
-    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
-
     get callback_auth_path('github')
-
+    
     assert_response :redirect
 
     user = User.find_by!(email: auth_hash[:info][:email].downcase)
