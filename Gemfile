@@ -30,18 +30,18 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'aasm'
+gem 'actionpack-action_caching'
+gem 'dry-container', '~> 0.7.1'
 gem 'enumerize'
 gem 'octokit'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
 gem 'rollbar'
+gem 'rubocop-performance', require: false
+gem 'rubocop-rails'
 gem 'simple_form'
 gem 'slim'
 gem 'slim-rails'
-gem 'actionpack-action_caching'
-gem 'dry-container', '~> 0.7.1'
-gem 'rubocop-performance', require: false
-gem 'rubocop-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
