@@ -11,7 +11,7 @@ module CheckJob
     report = parsed_json.map { |el| { filePath: el['filePath'], messages: el['messages'].map { |mes| mes.select { |k| SORT_MESSAGES.include?(k) } } } }.reject! { |el| el[:messages].empty? }
 
     issues_count = report.inject(0) { |count, el| count + el[:messages].size }
-    
+
     check_update(check, issues_count, report)
   end
 

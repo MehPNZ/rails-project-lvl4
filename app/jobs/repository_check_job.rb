@@ -7,7 +7,6 @@ class RepositoryCheckJob < ApplicationJob
   queue_as :default
 
   def perform(id)
-    
     repository_check = ApplicationContainer[:repository_check]
 
     repository_check.repos_clear
@@ -19,9 +18,9 @@ class RepositoryCheckJob < ApplicationJob
     file = repository_check.lint_language(check)
 
     send("#{check.repository.language}_build", file, check)
-    
+
     check.to_finish! if check.may_to_finish?
-    
+
     repository_check.repos_clear
     if !check.passed || check.failed?
       UserMailer.with(check: check).check_email.deliver_now

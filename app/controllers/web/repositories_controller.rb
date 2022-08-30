@@ -42,9 +42,9 @@ class Web::RepositoriesController < Web::ApplicationController
     language_list = Repository.language.values
     repository_loader = ApplicationContainer[:repository_loader]
     client = repository_loader.octokit_client(current_user.token)
-    @repos ||= repository_loader.get_repos(client).each_with_object([]) {|item, array|
-      array << item[:full_name] if language_list.include?(item[:language]&.downcase)}
-    
+    @repos ||= repository_loader.get_repos(client).each_with_object([]) do |item, array|
+      array << item[:full_name] if language_list.include?(item[:language]&.downcase)
+    end
   rescue Octokit::Unauthorized
     redirect_to root_path, notice: 'Your token has expired. Please re-login'
   end

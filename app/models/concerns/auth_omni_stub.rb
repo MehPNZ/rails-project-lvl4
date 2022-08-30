@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class AuthOmniStub
-  def self.request_omniauth(auth)
-    auth = {
+  def self.request_omniauth(_)
+    {
       info: {
-        email: "test@test.test",
-        nickname: "Testovich"
+        email: 'test@test.test',
+        nickname: 'Testovich'
       },
       credentials: {
         token: 'qwertyuiopdsasdfghjklfszxcvbnmvd123456'

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'json'
 
 class RepositoryCreateCheck
-
   def self.repos_clear
     Open3.capture2("rm -rf #{Rails.root}/tmp/repos/")
   end
@@ -29,5 +30,4 @@ class RepositoryCreateCheck
     repo = client.repo repository.full_name
     client.commits(repo.id)[0]['html_url']
   end
-  
 end

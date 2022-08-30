@@ -13,8 +13,8 @@ class Web::AuthControllerTest < ActionDispatch::IntegrationTest
       provider: 'github',
       uid: '12345',
       info: {
-        email: "test@test.test",
-        nickname: "Testovich"
+        email: 'test@test.test',
+        nickname: 'Testovich'
       },
       credentials: {
         token: 'qwertyuiopdsasdfghjklfszxcvbnmvd123456'
@@ -22,7 +22,7 @@ class Web::AuthControllerTest < ActionDispatch::IntegrationTest
     }
 
     get callback_auth_path('github')
-    
+
     assert_response :redirect
 
     user = User.find_by!(email: auth_hash[:info][:email].downcase)

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module AuthConcern
   extend ActiveSupport::Concern
 
@@ -20,6 +21,6 @@ module AuthConcern
   end
 
   def authenticate_user!
-    redirect_to root_path, notice: "You need to log in" unless user_signed_in?
+    redirect_to root_path, notice: 'You need to log in' unless user_signed_in?
   end
 end

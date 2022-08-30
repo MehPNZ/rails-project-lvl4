@@ -22,19 +22,19 @@ class ActiveSupport::TestCase
 end
 
 class ActionDispatch::IntegrationTest
-  def sign_in(user, _options = {})
-    auth_hash = {
-      provider: 'github',
-      uid: '12345',
-      info: {
-        email: user.email,
-        nickname: user.nickname,
-        token: user.token
-      },
-      credentials: {
-        token: user.token
-      }
-    }
+  def sign_in(_user, _options = {})
+    # auth_hash = {
+    #   provider: 'github',
+    #   uid: '12345',
+    #   info: {
+    #     email: user.email,
+    #     nickname: user.nickname,
+    #     token: user.token
+    #   },
+    #   credentials: {
+    #     token: user.token
+    #   }
+    # }
 
     # OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
     get callback_auth_path('github')

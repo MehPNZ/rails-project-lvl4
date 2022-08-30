@@ -1,11 +1,12 @@
+# frozen_string_literal: true
 
-require "dry-container"
+require 'dry-container'
 require 'octokit'
 
 module ApplicationContainer
   extend Dry::Container::Mixin
   extend ActiveSupport::Concern
-  
+
   if Rails.env.test?
     register :repository_loader, -> { RepositoryLoaderStub }
     register :repository_check, -> { RepositoryCreateCheckStub }
@@ -15,5 +16,4 @@ module ApplicationContainer
     register :repository_check, -> { RepositoryCreateCheck }
     register :auth, -> { AuthOmni }
   end
-
 end

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require "dry-container"
+
+require 'dry-container'
 
 class ApplicationContainer
   extend Dry::Container::Mixin
@@ -7,7 +8,6 @@ class ApplicationContainer
   if Rails.env.test?
     register :repository_loader, -> { RepositoryLoaderStub }
   else
-    register :repository_loader, -> { RepositoryLoader}
+    register :repository_loader, -> { RepositoryLoader }
   end
-
 end
