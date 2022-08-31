@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-require_relative '../fixtures/files/response_repos'
 
 class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -17,6 +16,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get new' do
     sign_in(@user)
+    
     get new_repository_url
     assert_response :success
   end

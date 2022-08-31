@@ -2,9 +2,8 @@
 
 require 'json'
 
-class RepositoryCreateCheck
+class RepositoryCreateCheckStub
   def self.repos_clear
-    Open3.capture2("rm -rf #{Rails.root}/tmp/repos/")
   end
 
   def self.lint_language(check)

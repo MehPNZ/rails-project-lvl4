@@ -73,6 +73,8 @@ group :test do
   gem 'minitest-power_assert'
   gem 'webdrivers'
   gem 'webmock'
+  gem 'slimcop'
+  gem 'slim_lint'
 end
 
 group :production do
