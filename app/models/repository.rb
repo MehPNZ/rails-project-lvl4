@@ -2,7 +2,8 @@
 
 class Repository < ApplicationRecord
   belongs_to :user
-  has_many :checks, class_name: 'RepositoryCheck', dependent: :destroy
+  # has_many :checks, class_name: 'RepositoryCheck', dependent: :destroy
+  has_many :checks, class_name: 'Repository::Check', dependent: :destroy
 
   validates :full_name, presence: true, uniqueness: true
 

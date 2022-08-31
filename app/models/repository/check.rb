@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RepositoryCheck < ApplicationRecord
+class Repository::Check < ApplicationRecord
   belongs_to :repository
 
   include AASM

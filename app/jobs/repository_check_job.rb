@@ -12,7 +12,7 @@ class RepositoryCheckJob < ApplicationJob
     
     repository_check.repos_clear
 
-    check = RepositoryCheck.find(id)
+    check = Repository::Check.find(id)
 
     check.to_check! if check.may_to_check?
 

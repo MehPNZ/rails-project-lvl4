@@ -14,7 +14,7 @@ class ChecksControllerTest < ActionDispatch::IntegrationTest
 
     post repository_checks_url(@repository)
 
-    check = RepositoryCheck.find_by! repository_id: @repository.id
+    check = Repository::Check.find_by! repository_id: @repository.id
 
     assert { check }
     assert_redirected_to repository_path(@repository)

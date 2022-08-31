@@ -20,7 +20,7 @@ class Web::ChecksController < Web::ApplicationController
 
   def show
     @repository = Repository.find(params[:repository_id])
-    @check ||= RepositoryCheck.find(params[:id])
+    @check ||= Repository::Check.find(params[:id])
     @report ||= ActiveSupport::JSON.decode(@check.report)
   end
 
