@@ -11,9 +11,9 @@ class RepositoryLoaderJob < ApplicationJob
     repository = Repository.find(id)
 
     repo = repository_loader.get_repo(client, repository)
-
     params = {
       name: repo.name,
+      github_id: repo.id,
       language: repo.language.downcase,
       repo_created_at: repo.created_at,
       repo_updated_at: repo.updated_at
