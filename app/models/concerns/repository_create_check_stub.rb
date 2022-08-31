@@ -24,8 +24,12 @@ class RepositoryCreateCheckStub
   end
 
   def self.show(_)
-    report = File.read('test/fixtures/files/report.txt')
-    result = ActiveSupport::JSON.decode(report)
-    result
+    # report = File.read('test/fixtures/files/report.txt')
+    # result = ActiveSupport::JSON.decode(report)
+    # result
+    [{"filePath"=>"tmp/repos/MehPNZ/masya/test/hexlet_code_test.rb", 
+      "messages"=>[{"message"=>"Missing top-level documentation comment for `class HexletCodeTest`.", 
+      "ruleId"=>"Style/Documentation", "line"=>5, "column"=>1}, {"message"=>"Prefer `assert_not_nil` over `refute_nil`.", 
+      "ruleId"=>"Rails/RefuteMethods", "line"=>7, "column"=>5}]}]
   end
 end
