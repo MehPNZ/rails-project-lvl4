@@ -3,8 +3,7 @@
 require 'json'
 
 class RepositoryCreateCheckStub
-  def self.repos_clear
-  end
+  def self.repos_clear; end
 
   def self.lint_language(check)
     repo_name = check.repository.full_name

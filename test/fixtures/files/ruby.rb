@@ -1,3 +1,5 @@
-def abc(a)
-  return a
+# frozen_string_literal: true
+
+def abcd(abc)
+  abc
 end

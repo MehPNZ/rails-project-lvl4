@@ -19,7 +19,6 @@ class Web::ChecksController < Web::ApplicationController
   end
 
   def show
-    debugger
     @repository = Repository.find(params[:repository_id])
     @check ||= RepositoryCheck.find(params[:id])
     @report ||= ActiveSupport::JSON.decode(@check.report)

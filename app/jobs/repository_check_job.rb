@@ -22,6 +22,7 @@ class RepositoryCheckJob < ApplicationJob
     check.to_finish! if check.may_to_finish?
 
     repository_check.repos_clear
+
     if !check.passed || check.failed?
       UserMailer.with(check: check).check_email.deliver_now
     end

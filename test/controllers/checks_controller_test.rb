@@ -3,28 +3,26 @@
 require 'test_helper'
 
 class ChecksControllerTest < ActionDispatch::IntegrationTest
-
   setup do
     @repository = repositories(:one)
     @check = repository_checks(:one)
     @user = users(:one)
   end
-  
 
-    test "should get create" do
-      sign_in(@user)
-      
-      post repository_checks_url(@repository)
+  test 'should get create' do
+    sign_in(@user)
 
-      check = RepositoryCheck.find_by! repository_id: @repository.id
-      
-      assert { check }
-      assert_redirected_to  repository_path(@repository)
-      assert_enqueued_with job: RepositoryCheckJob
-    end
+    post repository_checks_url(@repository)
 
-    test "should get show" do
-      get repository_check_url(@repository.id, @check.id)
-      assert_response :found
-    end
+    check = RepositoryCheck.find_by! repository_id: @repository.id
+
+    assert { check }
+    assert_redirected_to repository_path(@repository)
+    assert_enqueued_with job: RepositoryCheckJob
+  end
+
+  test 'should get show' do
+    get repository_check_url(@repository.id, @check.id)
+    assert_response :found
+  end
 end

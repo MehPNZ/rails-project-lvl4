@@ -16,7 +16,7 @@ class Web::RepositoriesController < Web::ApplicationController
     @repository = current_user.repositories.build(permitted_params)
     if @repository.save
       RepositoryLoaderJob.perform_later(@repository.id, current_user.token)
-      redirect_to repositories_path, notice: 'Repository is created.'
+      redirect_to repository_path(@repository), notice: 'Repository is created.'
     else
       repos_names
       flash[:notice] = @repository.errors.full_messages.to_sentence

@@ -3,8 +3,7 @@
 require 'json'
 
 class RepositoryCreateCheck
-  def self.repos_clear
-  end
+  def self.repos_clear; end
 
   def self.lint_language(check)
     case check.repository.language
@@ -23,4 +22,4 @@ class RepositoryCreateCheck
     # repo = client.repo repository.full_name
     # client.commits(repo.id)[0]['html_url']
   end
-end 
+end

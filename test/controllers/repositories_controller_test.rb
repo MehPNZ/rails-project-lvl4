@@ -16,7 +16,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get new' do
     sign_in(@user)
-    
+
     get new_repository_url
     assert_response :success
   end

@@ -4,7 +4,6 @@ class RepositoryLoaderJob < ApplicationJob
   queue_as :default
 
   def perform(id, token)
-    debugger
     repository_loader = ApplicationContainer[:repository_loader]
 
     client = repository_loader.octokit_client(token)
