@@ -1,0 +1,1 @@
+"[{\"filePath\":\"test.rb\",\"messages\":[{\"message\":\"Missing.\",\"ruleId\":\"Style\",\"line\":5,\"column\":1},{\"message\":\"Prefer `assert_not_nil` over `refute_nil`.\",\"ruleId\":\"Rails/RefuteMethods\",\"line\":7,\"column\":5}]}]"

@@ -24,5 +24,7 @@ class RepositoryCreateCheckStub
   end
 
   def self.show(_)
+    rep = File.read('test/fixtures/files/report.txt')
+    ActiveSupport::JSON.decode(rep)
   end
 end

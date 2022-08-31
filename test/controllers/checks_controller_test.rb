@@ -22,7 +22,7 @@ class ChecksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get show' do
-    get repository_check_url(@repository.id, @check.id)
+    get repository_check_path(@repository.id, @check.id)
     assert_response :found
   end
 end
