@@ -2,7 +2,7 @@
 
 require 'json'
 
-class RepositoryCreateCheck
+class RepositoryCreateCheckStub
   def self.repos_clear; end
 
   def self.lint_language(check)
