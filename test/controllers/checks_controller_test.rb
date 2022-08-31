@@ -6,7 +6,7 @@ class ChecksControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @repository = repositories(:one)
-    # @check = repository_checks(:one)
+    @check = repository_checks(:one)
     @user = users(:one)
   end
   
@@ -23,8 +23,8 @@ class ChecksControllerTest < ActionDispatch::IntegrationTest
       assert_enqueued_with job: RepositoryCheckJob
     end
 
-    # test "should get show" do
-    #   get repository_check_url(@repository.id, @check.id)
-    #   assert_response :found
-    # end
+    test "should get show" do
+      get repository_check_url(@repository.id, @check.id)
+      assert_response :found
+    end
 end

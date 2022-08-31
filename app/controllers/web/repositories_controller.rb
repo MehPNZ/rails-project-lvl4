@@ -20,7 +20,7 @@ class Web::RepositoriesController < Web::ApplicationController
     else
       repos_names
       flash[:notice] = @repository.errors.full_messages.to_sentence
-      render :new, locals: { repos: @repos }, status: :unprocessable_entity
+      render :new, locals: { repos: @repos }
       flash.clear
     end
   end

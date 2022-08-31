@@ -2,10 +2,11 @@
 
 class Web::AuthController < Web::ApplicationController
   def callback
+    
     email = auth[:info][:email].downcase
     nickname = auth[:info][:nickname]
     token = auth[:credentials][:token]
-
+    
     existing_user = User.find_or_create_by(email: email) do |user|
       user.nickname = nickname
     end
@@ -13,6 +14,7 @@ class Web::AuthController < Web::ApplicationController
     existing_user.update(token: token)
 
     if existing_user
+
       sign_in existing_user
       redirect_to root_path, notice: 'Successfully signed in into your account'
     else

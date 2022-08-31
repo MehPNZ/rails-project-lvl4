@@ -26,6 +26,6 @@ class RepositoryCheckJob < ApplicationJob
       UserMailer.with(check: check).check_email.deliver_now
     end
   rescue StandardError
-    check.to_fail! if check.may_to_fail?
+    check&.to_fail! if check&.may_to_fail?
   end
 end
