@@ -4,16 +4,16 @@ one:
   language: ruby
   full_name: MyString/MyString
   name: MyString
-  user: one
-  github_id: one
+  user_id: 1
+  github_id: 123
   repo_created_at: "11-11-2021"
   repo_updated_at: "11-11-2021"
 
-two:
-  language: javascript
-  full_name: MyString/MyString2
-  name: MyString
-  user: two
-  github_id: two
-  repo_created_at: "11-11-2021"
-  repo_updated_at: "11-11-2021"
+# two:
+#   language: javascript
+#   full_name: MyString/MyString2
+#   name: MyString
+#   user: two
+#   github_id: 123
+#   repo_created_at: "11-11-2021"
+#   repo_updated_at: "11-11-2021"
