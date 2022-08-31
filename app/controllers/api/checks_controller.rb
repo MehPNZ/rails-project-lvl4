@@ -8,11 +8,11 @@ class Api::ChecksController < ApplicationController
 
     @repository = Repository.find_by(full_name: params['repository']['full_name'])
     @check = @repository&.checks&.build(reference: params['head_commit']['url'])
-    @check.save
-    RepositoryCheckJob.perform_later(@check.id)
-      # redirect_to repository_path(@repository), notice: 'Check created!', status: 200
-    # else
-      # redirect_to repository_path(@repository), notice: 'ERROR: Check not created!', status: 200
-    # end
+    if @check.save
+      RepositoryCheckJob.perform_later(@check.id)
+      redirect_to repository_path(@repository), notice: 'Check created!', status: 200
+    else
+      redirect_to repository_path(@repository), notice: 'ERROR: Check not created!', status: 200
+    end
   end
 end
