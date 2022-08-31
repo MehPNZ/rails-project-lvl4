@@ -12,9 +12,9 @@ class Api::ChecksControllerTest < ActionDispatch::IntegrationTest
   test 'should get create' do
     sign_in(@user)
 
-    post api_checks_url, params: { repository: { id: @repository.github_id }, head_commit: { url: "https://test/test" }}
+    post api_checks_url
 
-    check = Repository::Check.find_by! repository_id: @repository.id
+    check = Repository::Check.find_by! reference: "http://test"
 
     assert { check }
     assert_enqueued_with job: RepositoryCheckJob
