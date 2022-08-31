@@ -10,7 +10,7 @@ class Api::ChecksController < ApplicationController
     @check = @repository&.checks&.build(reference: params['head_commit']['url'])
     if @check.save
       RepositoryCheckJob.perform_later(@check.id)
-      render status: 200,  json: @check.to_json
+      respond_to {|format| format.html}
     else
       render status: 500
     end
