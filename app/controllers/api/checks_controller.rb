@@ -10,9 +10,9 @@ class Api::ChecksController < ApplicationController
     @check = @repository&.checks&.build(reference: params['head_commit']['url'])
     if @check.save
       RepositoryCheckJob.perform_later(@check.id)
-      redirect_to repository_path(@repository), notice: 'Check created!', status: 200
+      render status: 200
     else
-      redirect_to repository_path(@repository), notice: 'ERROR: Check not created!', status: 200
+      render status: 500
     end
   end
 end
