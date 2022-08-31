@@ -10,7 +10,7 @@ class ApiCheckStub
   end
 
   def self.build(repository, _)
-    repository.checks.build(reference: "http://test")
+    repository.checks.build(reference: "http://test", passed: true)
   end
 
 end 

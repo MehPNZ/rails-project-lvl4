@@ -30,4 +30,9 @@ class RepositoryCreateCheck
     repo = client.repo repository.full_name
     client.commits(repo.id)[0]['html_url']
   end
+
+  def self.show(check)
+    ActiveSupport::JSON.decode(check.report)
+  end
+
 end

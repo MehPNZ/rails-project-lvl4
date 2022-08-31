@@ -19,9 +19,11 @@ class Web::ChecksController < Web::ApplicationController
   end
 
   def show
+    repository_check = ApplicationContainer[:repository_check]
     @repository = Repository.find(params[:repository_id])
     @check ||= Repository::Check.find(params[:id])
-    @report ||= ActiveSupport::JSON.decode(@check.report)
+    # @report ||= ActiveSupport::JSON.decode(@check.report)
+    @report ||= repository_check.show(@check)
   end
 
   private

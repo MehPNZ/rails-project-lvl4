@@ -22,4 +22,7 @@ class RepositoryCreateCheckStub
     # repo = client.repo repository.full_name
     # client.commits(repo.id)[0]['html_url']
   end
+
+  def self.show(_)
+  end
 end
