@@ -20,7 +20,7 @@ class Web::RepositoriesController < Web::ApplicationController
     else
       repos_names
       flash[:notice] = @repository.errors.full_messages.to_sentence
-      render :new, locals: { repos: @repos }
+      render :new, locals: { repos: @repos }, status: 302
       flash.clear
     end
   end

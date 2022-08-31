@@ -40,7 +40,7 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     repository = Repository.find_by! full_name: full_name
 
     assert { repository }
-    assert_redirected_to repositories_path
+    assert_redirected_to repository_path(repository)
     assert_enqueued_with job: RepositoryLoaderJob
   end
 end
