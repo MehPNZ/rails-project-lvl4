@@ -3,7 +3,7 @@
 class RepositoryLoaderJob < ApplicationJob
   queue_as :default
 
-  def perform(id, token)
+  def perform(id, token, url_webhook)
     repository_loader = ApplicationContainer[:repository_loader]
 
     client = repository_loader.octokit_client(token)
@@ -20,7 +20,8 @@ class RepositoryLoaderJob < ApplicationJob
     }
 
     repository.update(params)
-
-    repository_loader.create_hook(client, repo)
+    debugger
+    # client.create_hook(repo.full_name, 'web', { url: url_webhook, content_type: 'json' }, { events: ['push'], active: true, insecure_ssl: 0 })
+    repository_loader.create_hook(client, repo, url_webhook)
   end
 end
