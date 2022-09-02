@@ -13,7 +13,7 @@ class ActiveSupport::TestCase
   def load_fixture(filename)
     File.read(File.dirname(__FILE__) + "/fixtures/files/#{filename}")
   end
-  
+
   fixtures :all
 end
 
@@ -29,6 +29,11 @@ class ActionDispatch::IntegrationTest
   end
 
   def current_user
+    debugger
     @current_user ||= User.find_by(id: session[:user_id])
+  end
+
+  def authenticate_user!
+    sign_in unless signed_in?
   end
 end
