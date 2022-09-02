@@ -8,35 +8,19 @@ require 'webmock/minitest'
 OmniAuth.config.test_mode = true
 
 class ActiveSupport::TestCase
-  # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
   def load_fixture(filename)
     File.read(File.dirname(__FILE__) + "/fixtures/files/#{filename}")
   end
-
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+  
   fixtures :all
-
-  # Add more helper methods to be used by all tests here...
 end
 
 class ActionDispatch::IntegrationTest
   def sign_in(_user, _options = {})
-    # auth_hash = {
-    #   provider: 'github',
-    #   uid: '12345',
-    #   info: {
-    #     email: user.email,
-    #     nickname: user.nickname,
-    #     token: user.token
-    #   },
-    #   credentials: {
-    #     token: user.token
-    #   }
-    # }
-
-    # OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
+    auth_hash = Faker::Omniauth.github
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
     get callback_auth_path('github')
   end
 

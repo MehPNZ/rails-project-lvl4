@@ -9,18 +9,9 @@ class Web::AuthControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create' do
-    auth_hash = {
-      provider: 'github',
-      uid: '12345',
-      info: {
-        email: 'test@test.test',
-        nickname: 'Testovich'
-      },
-      credentials: {
-        token: 'qwertyuiopdsasdfghjklfszxcvbnmvd123456'
-      }
-    }
-
+     auth_hash =Faker::Omniauth.github 
+    
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(auth_hash)
     get callback_auth_path('github')
 
     assert_response :redirect
