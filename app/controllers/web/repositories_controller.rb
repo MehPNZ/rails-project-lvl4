@@ -15,11 +15,10 @@ class Web::RepositoriesController < Web::ApplicationController
   def create
     @repository = current_user.repositories.build(permitted_params)
     if @repository.save
-      
+
       url_webhook = url_for(controller: 'api/checks', action: 'create')
       RepositoryLoaderJob.perform_later(@repository.id, current_user.token, url_webhook)
       redirect_to repository_path(@repository), notice: 'Repository is created.'
-      # debugger
       # client.create_hook(repo.full_name, 'web', { url: url_for(controller: 'api/checks', action: 'create'), content_type: 'json' }, { events: ['push'], active: true, insecure_ssl: 0 })
     else
       repos_names

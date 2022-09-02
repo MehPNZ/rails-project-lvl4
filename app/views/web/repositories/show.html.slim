@@ -1,7 +1,7 @@
 h1 = @repository.full_name
 
 div id="progress-bar"
-
+- debugger
 .mb-3.mt-3
   div.btn-group
     - if @repository.checks.last&.checking? || @repository.checks.last&.created?
