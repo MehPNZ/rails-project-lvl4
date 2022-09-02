@@ -3,7 +3,6 @@
 class Web::AuthController < Web::ApplicationController
 
   def callback
-
     email = auth[:info][:email].downcase
     nickname = auth[:info][:nickname]
     token = auth[:credentials][:token]
@@ -24,8 +23,11 @@ class Web::AuthController < Web::ApplicationController
   private
 
   def auth
-    auth = ApplicationContainer[:repository_loader]
-    # request.env['omniauth.auth']
-    auth.auth_omni(request.env['omniauth.auth'])
+    if Rails.env.test?
+      auth_hash =Faker::Omniauth.github 
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(auth_hash)
+    else
+      request.env['omniauth.auth']
+    end
   end
 end
