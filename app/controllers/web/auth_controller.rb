@@ -23,11 +23,11 @@ class Web::AuthController < Web::ApplicationController
   private
 
   def auth
-    if Rails.env.test?
-      auth_hash =Faker::Omniauth.github 
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(auth_hash)
-    else
+    # debugger
+    # if Rails.env.test? 
+    #   auth_hash =Faker::Omniauth.github 
+    #   OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(auth_hash)
+    # else
       request.env['omniauth.auth']
-    end
   end
 end

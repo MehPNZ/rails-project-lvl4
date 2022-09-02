@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 class RepositoryLoader
 
-  # def self.authenticate_user(session)
-  #   redirect_to :back, notice: 'You need to log in' unless session[:user_id].nil?
-  # end
-
   def self.octokit_client(token)
     Octokit::Client.new access_token: token, auto_paginate: true
   end

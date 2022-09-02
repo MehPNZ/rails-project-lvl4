@@ -19,15 +19,6 @@ class RepositoryLoaderStub
      { id: 504_422_113, full_name: 'MehPNZ/simple_form', language: 'Javascript' }]
   end
 
-  # def self.authenticate_user(session)
-  #   # auth_hash = Faker::Omniauth.github
-  #   # OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
-  #   # # callback_auth_path('github')  
-  #   user = User.new(email: "test@test.com", nickname: "test", token: "qwdasdqdw3423424")
-  #   user.save
-  #   debugger
-  #   session[:user_id] = user.id
-  # end
   def self.auth_omni(_)
     OmniAuth.config.test_mode = true
     Faker::Omniauth.github
