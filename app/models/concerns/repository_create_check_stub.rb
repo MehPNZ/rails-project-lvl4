@@ -16,17 +16,10 @@ class RepositoryCreateCheckStub
     end
   end
 
-  def self.commit_reference(check)
-    # client = Octokit::Client.new
-    # repository = Repository.find(check.repository_id)
-    # repo = client.repo repository.full_name
-    # client.commits(repo.id)[0]['html_url']
+  def self.commit_reference(_)
   end
 
   def self.show(_)
-    # report = File.read('test/fixtures/files/report.txt')
-    # result = ActiveSupport::JSON.decode(report)
-    # result
     [{"filePath"=>"tmp/repos/MehPNZ/masya/test/hexlet_code_test.rb", 
       "messages"=>[{"message"=>"Missing top-level documentation comment for `class HexletCodeTest`.", 
       "ruleId"=>"Style/Documentation", "line"=>5, "column"=>1}, {"message"=>"Prefer `assert_not_nil` over `refute_nil`.", 

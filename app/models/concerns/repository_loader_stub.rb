@@ -28,5 +28,8 @@ class RepositoryLoaderStub
   #   debugger
   #   session[:user_id] = user.id
   # end
-
+  def self.auth_omni(_)
+    OmniAuth.config.test_mode = true
+    Faker::Omniauth.github
+  end
 end

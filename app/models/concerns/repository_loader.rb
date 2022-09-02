@@ -21,7 +21,7 @@ class RepositoryLoader
     client.repos
   end
 
-    # def self.authenticate_user(session)
-  #   redirect_to :back, notice: 'You need to log in' unless session[:user_id].nil?
-  # end
+  def self.auth_omni(request)
+    request
+  end
 end

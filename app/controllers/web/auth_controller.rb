@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Web::AuthController < Web::ApplicationController
+
   def callback
-    
+
     email = auth[:info][:email].downcase
     nickname = auth[:info][:nickname]
     token = auth[:credentials][:token]
@@ -23,6 +24,8 @@ class Web::AuthController < Web::ApplicationController
   private
 
   def auth
-    request.env['omniauth.auth']
+    auth = ApplicationContainer[:repository_loader]
+    # request.env['omniauth.auth']
+    auth.auth_omni(request.env['omniauth.auth'])
   end
 end
