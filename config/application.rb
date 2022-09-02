@@ -23,7 +23,6 @@ module GithubQuality
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
-    debugger
   end
 end
 
