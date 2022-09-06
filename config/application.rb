@@ -21,7 +21,7 @@ module GithubQuality
     config.before_configuration do
       path = Rails.root.join('config/local_env.yml')
       env_file = File.join(path)
-      if File.exists?(env_file)
+      if File.exist?(env_file)
         YAML.safe_load(File.open(env_file)).each do |key, value|
           ENV[key.to_s] = value
         end
@@ -29,5 +29,3 @@ module GithubQuality
     end
   end
 end
-
-

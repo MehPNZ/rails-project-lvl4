@@ -67,13 +67,4 @@ Naming/MemoizedInstanceVariableName:
 
 Metrics/ModuleLength:
   Enabled: false
-
-Lint/DeprecatedClassMethods:
-  Enabled: false
-
-Layout/TrailingEmptyLines:
-  Enabled: false
-
-Style/GlobalStdStream:
-  Enabled: false
-
+  
