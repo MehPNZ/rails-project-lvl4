@@ -45,7 +45,6 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     assert { repository }
 
-
     assert { repository.language.present? }
     assert { repository.full_name.present? }
   end

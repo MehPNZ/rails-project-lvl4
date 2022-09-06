@@ -18,6 +18,7 @@ AllCops:
     - 'code/tmp/**/*'
     - 'config/**/*'
     - 'bin/**/*'
+    - 'db/schema.rb'
   SuggestExtensions: false
 
 Rails:
