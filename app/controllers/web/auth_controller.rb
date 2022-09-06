@@ -13,9 +13,9 @@ class Web::AuthController < Web::ApplicationController
 
     if existing_user
       sign_in existing_user
-      redirect_to root_path, notice: 'Successfully signed in into your account'
+      redirect_to root_path, notice: t('auth_signed')
     else
-      redirect_to root_path, notice: 'Error auth!'
+      redirect_to root_path, notice: t('auth_error')
     end
   end
 

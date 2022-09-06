@@ -11,29 +11,26 @@ class Web::ChecksController < Web::ApplicationController
 
     @check = @repository.checks.build(permitted_params)
     if @check.save
-    
-      repository_check = ApplicationContainer[:repository_check]
-
       repository_check.check_job(@check)
-
-      # RepositoryCheckJob.perform_later(@check.id)
-      redirect_to repository_path(@repository), notice: 'Check created!'
+      redirect_to repository_path(@repository), notice: t('check_created')
     else
-      redirect_to repository_path(@repository), notice: 'ERROR: Check not created!'
+      redirect_to repository_path(@repository), notice: t('check_error')
     end
   end
 
   def show
-    repository_check = ApplicationContainer[:repository_check]
     @repository = Repository.find(params[:repository_id])
     @check ||= Repository::Check.find(params[:id])
-    # @report ||= ActiveSupport::JSON.decode(@check.report)
-    @report ||= repository_check.show(@check)
+    @report = repository_check.show(@check)
   end
 
   private
 
   def permitted_params
     params.permit(:repository_id)
+  end
+
+  def repository_check
+    ApplicationContainer[:repository_check]
   end
 end

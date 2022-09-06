@@ -12,10 +12,6 @@ module AuthConcern
     session.clear
   end
 
-  def user_signed_in?
-    !current_user.nil?
-  end
-
   def signed_in?
     session[:user_id].present? && current_user.present?
   end
@@ -25,6 +21,6 @@ module AuthConcern
   end
 
   def authenticate_user!
-    redirect_to root_path, notice: 'You need to log in' unless user_signed_in?
+    redirect_to root_path, notice: t('auth_log_in') unless signed_in?
   end
 end

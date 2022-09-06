@@ -1,10 +1,10 @@
 h1 = @repository.full_name
 
 .mb-3.mt-3
-  div.btn-group
+  .btn-group
     - if @repository.checks.last&.checking? || @repository.checks.last&.created?
-      - flash[:notice] = 'Loading is in progress'
-      div.spinner-border.me-2 role="status"
+      - flash[:notice] = t('repo_show')
+      .spinner-border.me-2 role="status"
         span.visually-hidden Загрузка...
       = link_to 'Update status', repository_path(@repository.id), class: 'btn btn-outline-success'
     - else

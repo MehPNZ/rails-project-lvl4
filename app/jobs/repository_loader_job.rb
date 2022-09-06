@@ -13,7 +13,7 @@ class RepositoryLoaderJob < ApplicationJob
     params = repository_loader.get_repo(client, repository)
 
     repository.update(params)
-    
+
     repository_loader.create_hook(client, repository.full_name, url_webhook)
   end
 end

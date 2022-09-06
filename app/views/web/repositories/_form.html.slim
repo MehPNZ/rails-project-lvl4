@@ -1,3 +1,3 @@
 = simple_form_for(@repository) do |f|
-  = f.select :full_name, @repos, { include_blank: true }, { class: 'form-control' }
+  = f.select :github_id, @repos, { include_blank: true }, { class: 'form-control' }
   = f.button :submit, class: 'btn btn-success mt-4 btn-block'

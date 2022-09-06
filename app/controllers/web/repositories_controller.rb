@@ -4,7 +4,7 @@ class Web::RepositoriesController < Web::ApplicationController
   before_action :authenticate_user!
 
   def index
-    @repositories ||= Repository.where(user_id: current_user.id)
+    @repositories = Repository.where(user_id: current_user.id)
   end
 
   def new
@@ -14,13 +14,12 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def create
     @repository = current_user.repositories.build(permitted_params)
+
     if @repository.save
       url_webhook = url_for(controller: 'api/checks', action: 'create')
-      repository_loader = ApplicationContainer[:repository_loader]
       repository_loader.repo_job(@repository, current_user, url_webhook)
-      # RepositoryLoaderJob.perform_later(@repository.id, current_user.token, url_webhook)
-      redirect_to repository_path(@repository), notice: 'Repository is created.'
-      # client.create_hook(repo.full_name, 'web', { url: url_for(controller: 'api/checks', action: 'create'), content_type: 'json' }, { events: ['push'], active: true, insecure_ssl: 0 })
+
+      redirect_to repositories_path, notice: t('repo_created')
     else
       repos_names
       flash[:notice] = @repository.errors.full_messages.to_sentence
@@ -38,16 +37,19 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def repos_names
     language_list = Repository.language.values
-    repository_loader = ApplicationContainer[:repository_loader]
     client = repository_loader.octokit_client(current_user.token)
     @repos ||= repository_loader.get_repos(client).each_with_object([]) do |item, array|
-      array << item[:full_name] if language_list.include?(item[:language]&.downcase)
+      array << [item[:full_name], item[:id]] if language_list.include?(item[:language]&.downcase)
     end
   rescue Octokit::Unauthorized
-    redirect_to root_path, notice: 'Your token has expired. Please re-login'
+    redirect_to root_path, notice: t('repo_token')
   end
 
   def permitted_params
-    params.require(:repository).permit(:full_name, :github_id)
+    params.require(:repository).permit(:github_id)
+  end
+
+  def repository_loader
+    ApplicationContainer[:repository_loader]
   end
 end
