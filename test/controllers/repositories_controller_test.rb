@@ -27,21 +27,26 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should_create' do
+  test 'create' do
     sign_in(@user)
+    id = Faker::Number.number(digits: 10)
 
-    full_name = 'https://github.com/octocat/Hello-World'
+    attrs = {
+      github_id: id
+    }
 
-    response = JSON.parse(load_fixture('response.json'))
+    post repositories_url, params: {
+      repository: attrs
+    }
 
-    stub_request(:any, 'https://api.github.com/repos/octocat/Hello-World').to_return body: response.to_json, headers: { content_type: 'application/json' }
+    assert_response :redirect
 
-    post repositories_url, params: { repository: { full_name: full_name } }
-
-    repository = Repository.find_by! full_name: full_name
+    repository = Repository.find_by github_id: id
 
     assert { repository }
-    assert_redirected_to repository_path(repository)
-    assert_enqueued_with job: RepositoryLoaderJob
+
+
+    assert { repository.language.present? }
+    assert { repository.full_name.present? }
   end
 end

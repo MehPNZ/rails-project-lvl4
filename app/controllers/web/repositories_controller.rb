@@ -16,7 +16,9 @@ class Web::RepositoriesController < Web::ApplicationController
     @repository = current_user.repositories.build(permitted_params)
     if @repository.save
       url_webhook = url_for(controller: 'api/checks', action: 'create')
-      RepositoryLoaderJob.perform_later(@repository.id, current_user.token, url_webhook)
+      repository_loader = ApplicationContainer[:repository_loader]
+      repository_loader.repo_job(@repository, current_user, url_webhook)
+      # RepositoryLoaderJob.perform_later(@repository.id, current_user.token, url_webhook)
       redirect_to repository_path(@repository), notice: 'Repository is created.'
       # client.create_hook(repo.full_name, 'web', { url: url_for(controller: 'api/checks', action: 'create'), content_type: 'json' }, { events: ['push'], active: true, insecure_ssl: 0 })
     else
@@ -46,6 +48,6 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def permitted_params
-    params.require(:repository).permit(:full_name)
+    params.require(:repository).permit(:full_name, :github_id)
   end
 end
