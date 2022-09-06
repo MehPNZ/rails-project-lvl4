@@ -16,7 +16,6 @@ AllCops:
     - 'vendor/**/*'
     - 'node_modules/**/*'
     - 'code/tmp/**/*'
-    - 'config/**/*'
     - 'bin/**/*'
     - 'db/schema.rb'
   SuggestExtensions: false
@@ -69,7 +68,12 @@ Naming/MemoizedInstanceVariableName:
 Metrics/ModuleLength:
   Enabled: false
 
-Rails/FilePath:
+Lint/DeprecatedClassMethods:
   Enabled: false
 
+Layout/TrailingEmptyLines:
+  Enabled: false
+
+Style/GlobalStdStream:
+  Enabled: false
 

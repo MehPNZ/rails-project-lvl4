@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/integer/time'
 
 # The test environment is used exclusively to run your application's
@@ -6,7 +8,6 @@ require 'active_support/core_ext/integer/time'
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
-
   # Settings specified here will take precedence over those in config/application.rb.
 
   config.cache_classes = false

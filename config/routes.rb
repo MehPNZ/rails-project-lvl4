@@ -1,5 +1,6 @@
+# frozen_string_literal: true
 
-Rails.application.routes.default_url_options[:host] = ENV['BASE_URL']
+Rails.application.routes.default_url_options[:host] = ENV.fetch('BASE_URL', nil)
 
 Rails.application.routes.draw do
   root to: 'home#index'
