@@ -38,4 +38,13 @@ class RepositoryCreateCheck
   def self.check_job(check)
     RepositoryCheckJob.perform_later(check.id)
   end
+
+  def self.decode_json(file)
+    ActiveSupport::JSON.decode(file.chomp)
+  end
+
+  def self.report(parsed_json, sort_messages)
+    parsed_json.map { |el| { filePath: el['filePath'], messages: el['messages'].map { |mes| mes.select { |k| sort_messages.include?(k) } } } }.reject! { |el| el[:messages].empty? }
+  end
+
 end

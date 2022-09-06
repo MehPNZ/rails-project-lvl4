@@ -3,17 +3,18 @@
 require 'json'
 
 class RepositoryCreateCheckStub
-  def self.repos_clear; end
+  def self.repos_clear; 
+  end
 
   def self.lint_language(check)
-    case check.repository.language
-    when 'javascript'
-      Open3.capture2("yarn run eslint --format json -o #{Rails.root}/test/fixtures/files/javascript.json #{Rails.root}/test/fixtures/files/javascript.js")
-      File.read("#{Rails.root}/test/fixtures/files/javascript.json", encoding: 'utf-8')
-    when 'ruby'
-      Open3.capture2("rubocop --format json --out #{Rails.root}/test/fixtures/files/rubocop.json #{Rails.root}/test/fixtures/files/ruby.rb")
-      File.read("#{Rails.root}/test/fixtures/files/rubocop.json", encoding: 'utf-8')
-    end
+    # case check.repository.language
+    # when 'javascript'
+    #   Open3.capture2("yarn run eslint --format json -o #{Rails.root}/test/fixtures/files/javascript.json #{Rails.root}/test/fixtures/files/javascript.js")
+    #   File.read("#{Rails.root}/test/fixtures/files/javascript.json", encoding: 'utf-8')
+    # when 'ruby'
+    #   Open3.capture2("rubocop --format json --out #{Rails.root}/test/fixtures/files/rubocop.json #{Rails.root}/test/fixtures/files/ruby.rb")
+    #   File.read("#{Rails.root}/test/fixtures/files/rubocop.json", encoding: 'utf-8')
+    # end
   end
 
   def self.commit_reference(_); end
@@ -27,5 +28,13 @@ class RepositoryCreateCheckStub
 
   def self.check_job(check)
     RepositoryCheckJob.perform_now(check.id)
+  end
+
+  def self.decode_json(file)
+    []
+  end
+
+  def self.report(parsed_json, sort_messages)
+    []
   end
 end

@@ -6,12 +6,17 @@ module CheckJob
   SORT_MESSAGES = %w[ruleId message line column].freeze
 
   def javascript_build(file, check)
-    parsed_json = ActiveSupport::JSON.decode(file.chomp)
+    
+    # parsed_json = ActiveSupport::JSON.decode(file.chomp)
 
-    report = parsed_json.map { |el| { filePath: el['filePath'], messages: el['messages'].map { |mes| mes.select { |k| SORT_MESSAGES.include?(k) } } } }.reject! { |el| el[:messages].empty? }
+    repository_check = ApplicationContainer[:repository_check]
+    parsed_json = repository_check.decode_json(file)
 
+    # report = parsed_json.map { |el| { filePath: el['filePath'], messages: el['messages'].map { |mes| mes.select { |k| SORT_MESSAGES.include?(k) } } } }.reject! { |el| el[:messages].empty? }
+    report = repository_check.report(parsed_json, SORT_MESSAGES)
+    
     issues_count = report.inject(0) { |count, el| count + el[:messages].size }
-
+    
     check_update(check, issues_count, report)
   end
 

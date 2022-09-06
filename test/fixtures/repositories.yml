@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  language: ruby
+  language: javascript
   full_name: MyString/MyString
   name: MyString
   user_id: 1

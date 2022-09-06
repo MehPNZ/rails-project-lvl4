@@ -11,7 +11,9 @@ class Web::ChecksController < Web::ApplicationController
 
     @check = @repository.checks.build(permitted_params)
     if @check.save
+    
       repository_check = ApplicationContainer[:repository_check]
+
       repository_check.check_job(@check)
 
       # RepositoryCheckJob.perform_later(@check.id)

@@ -16,7 +16,7 @@ class RepositoryCheckJob < ApplicationJob
     check.to_check! if check.may_to_check?
 
     file = repository_check.lint_language(check)
-
+    
     send("#{check.repository.language}_build", file, check)
 
     check.to_finish! if check.may_to_finish?
@@ -28,5 +28,5 @@ class RepositoryCheckJob < ApplicationJob
     end
   rescue StandardError
     check&.to_fail! if check&.may_to_fail?
-  end
+  end 
 end

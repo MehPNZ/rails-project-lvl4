@@ -22,6 +22,7 @@ class ChecksControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
 
     check = @repository.checks.last
+    
     assert { check.finished? }
     assert { check.passed }
   end
