@@ -30,4 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  auth_log_in: "You need to log in"
+  auth_signed: 'Successfully signed in into your account'
+  auth_error: 'Error authentication!'
+  check_created: 'Check created!'
+  check_error: 'ERROR: Check not created!'
+  repo_created: 'Repository is created.'
+  repo_token: 'Your token has expired. Please re-login'
+  repo_show: 'Loading is in progress'
