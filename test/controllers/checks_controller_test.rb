@@ -9,20 +9,20 @@ class ChecksControllerTest < ActionDispatch::IntegrationTest
     @user = users(:one)
   end
 
-  test 'should get create' do
+  test 'should get show' do
+    sign_in(@user)
+    get repository_check_url(@repository.id, @check.id)
+    assert_response :success
+  end
+
+  test 'create' do
     sign_in(@user)
 
     post repository_checks_url(@repository)
+    assert_response :redirect
 
-    check = Repository::Check.find_by! repository_id: @repository.id
-
-    assert { check }
-    assert_redirected_to repository_path(@repository)
-    assert_enqueued_with job: RepositoryCheckJob
-  end
-
-  test 'should get show' do
-    get repository_check_path(@repository.id, @check.id)
-    assert_response :found
+    check = @repository.checks.last
+    assert { check.finished? }
+    assert { check.passed }
   end
 end

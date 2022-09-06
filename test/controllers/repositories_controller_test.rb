@@ -22,8 +22,9 @@ class RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get show' do
+    sign_in(@user)
     get repository_url(@repository)
-    assert_response :found
+    assert_response :success
   end
 
   test 'should_create' do

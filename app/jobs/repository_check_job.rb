@@ -7,9 +7,8 @@ class RepositoryCheckJob < ApplicationJob
   queue_as :default
 
   def perform(id)
-    
     repository_check = ApplicationContainer[:repository_check]
-    
+
     repository_check.repos_clear
 
     check = Repository::Check.find(id)

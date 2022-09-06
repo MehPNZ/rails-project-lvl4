@@ -35,4 +35,7 @@ class RepositoryCreateCheck
     ActiveSupport::JSON.decode(check.report)
   end
 
+  def self.check_job(check)
+    RepositoryCheckJob.perform_later(check.id)
+  end
 end

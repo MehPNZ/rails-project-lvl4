@@ -15,7 +15,6 @@ class Web::RepositoriesController < Web::ApplicationController
   def create
     @repository = current_user.repositories.build(permitted_params)
     if @repository.save
-
       url_webhook = url_for(controller: 'api/checks', action: 'create')
       RepositoryLoaderJob.perform_later(@repository.id, current_user.token, url_webhook)
       redirect_to repository_path(@repository), notice: 'Repository is created.'
@@ -23,7 +22,7 @@ class Web::RepositoriesController < Web::ApplicationController
     else
       repos_names
       flash[:notice] = @repository.errors.full_messages.to_sentence
-      render :new, locals: { repos: @repos }, status: 302
+      render :new, locals: { repos: @repos }, status: :found
       flash.clear
     end
   end
