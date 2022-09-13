@@ -22,6 +22,6 @@ class RepositoryLoaderStub
   end
 
   def self.repo_job(repository, current_user, url_webhook)
-    RepositoryLoaderJob.perform_now(repository.id, current_user.token, url_webhook)
+    UpdateRepositoryInfoJob.perform_now(repository.id, current_user.token, url_webhook)
   end
 end

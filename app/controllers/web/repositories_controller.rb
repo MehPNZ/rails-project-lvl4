@@ -38,8 +38,10 @@ class Web::RepositoriesController < Web::ApplicationController
   def repos_names
     language_list = Repository.language.values
     client = repository_loader.octokit_client(current_user.token)
-    @repos ||= repository_loader.get_repos(client).each_with_object([]) do |item, array|
-      array << [item[:full_name], item[:id]] if language_list.include?(item[:language]&.downcase)
+    @repos = Rails.cache.fetch('repos_name', expires_in: 12.hours) do
+      repository_loader.get_repos(client).each_with_object([]) do |item, array|
+        array << [item[:full_name], item[:id]] if language_list.include?(item[:language]&.downcase)
+      end
     end
   rescue Octokit::Unauthorized
     redirect_to root_path, notice: t('repo_token')

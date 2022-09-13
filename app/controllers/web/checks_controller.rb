@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'open3'
-
 class Web::ChecksController < Web::ApplicationController
   before_action :authenticate_user!
   caches_action :show

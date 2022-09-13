@@ -25,6 +25,6 @@ class RepositoryLoader < ApplicationRecord
   end
 
   def self.repo_job(repository, current_user, url_webhook)
-    RepositoryLoaderJob.perform_later(repository.id, current_user.token, url_webhook)
+    UpdateRepositoryInfoJob.perform_later(repository.id, current_user.token, url_webhook)
   end
 end
