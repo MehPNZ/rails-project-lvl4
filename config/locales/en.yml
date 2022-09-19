@@ -1,40 +1,34 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  auth_log_in: "You need to log in"
+  attention_app: 'Attention! For the app you need to install:'
+  auth_log_in: 'You need to log in'
   auth_signed: 'Successfully signed in into your account'
   auth_error: 'Error authentication!'
-  check_created: 'Check created!'
+  check: 'Check'
+  check_created: 'Check created_at'
   check_error: 'ERROR: Check not created!'
+  check_passed: 'Check passed'
+  created_at: 'Created at'
+  github_app: 'GITHUB APP av-github-quality'
+  subject_mail: 'Github quality check repository'
+  greeting: 'Hello from av-github-quality'
+  home: 'Home'
+  language: 'language'
+  last_check_passed: 'Last check passed'
+  line_column: 'Line column'
+  load: "Load..."
+  log_in: 'Log In'
+  message: 'Message'
+  mail_info: 'The repository check failed. Fix according to the linter review and push a new commit to Github.  Link to the review: '
+  name: 'Name'
+  new: 'New'
+  new_repository: 'New Repository'
+  repositories: 'Repositories'
+  reference: 'Reference'
   repo_created: 'Repository is created.'
   repo_token: 'Your token has expired. Please re-login'
   repo_show: 'Loading is in progress'
+  rule: 'Rule'
+  status: 'Status'
+  state: 'State'
+  issues_count: 'Issues count'
+  update_status: 'Update status'

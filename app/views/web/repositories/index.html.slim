@@ -1,14 +1,14 @@
 - content_for :title do
-  = 'Repositories'
+  = t('repositories')
 
-.mb-3 = link_to 'New', new_repository_path, class: 'btn btn-primary'
+.mb-3 = link_to t('new'), new_repository_path, class: 'btn btn-primary'
 
 table.table.table-striped.table-hover.mb-5
   thead
     tr
-      th{ scope: :col } = 'Name'
-      th{ scope: :col } = 'language'
-      th{ scope: :col } = 'Last check passed'
+      th{ scope: :col } = t('name')
+      th{ scope: :col } = t('language')
+      th{ scope: :col } = t('last_check_passed')
       th
 
   tbody

@@ -5,7 +5,6 @@ require 'octokit'
 
 module ApplicationContainer
   extend Dry::Container::Mixin
-  extend ActiveSupport::Concern
 
   if Rails.env.test?
     register :api_check, -> { ApiCheckStub }

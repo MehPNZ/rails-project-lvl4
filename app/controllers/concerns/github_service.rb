@@ -2,7 +2,7 @@
 
 module GithubService
   extend ActiveSupport::Concern
-  def github_user(auth)
+  def login_via_github!(auth)
     email = auth[:info][:email].downcase
     nickname = auth[:info][:nickname]
     token = auth[:credentials][:token]

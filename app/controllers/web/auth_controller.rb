@@ -2,8 +2,7 @@
 
 class Web::AuthController < Web::ApplicationController
   def callback
-    if github_user(auth)
-      sign_in github_user(auth)
+    if sign_in login_via_github!(auth)
       redirect_to root_path, notice: t('auth_signed')
     else
       redirect_to root_path, notice: t('auth_error')

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RepositoryLoader < ApplicationRecord
+class RepositoryLoader
   def self.octokit_client(token)
     Octokit::Client.new access_token: token, auto_paginate: true
   end

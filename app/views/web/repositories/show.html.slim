@@ -5,11 +5,11 @@ h1 = @repository.full_name
     - if @repository.checks.last&.checking? || @repository.checks.last&.created?
       - flash[:notice] = t('repo_show')
       .spinner-border.me-2 role="status"
-        span.visually-hidden Загрузка...
-      = link_to 'Update status', repository_path(@repository.id), class: 'btn btn-outline-success'
+        span.visually-hidden t('load')
+      = link_to t('update_status'), repository_path(@repository.id), class: 'btn btn-outline-success'
     - else
       - flash.clear
-      = link_to 'Check', repository_checks_path(@repository.id), method: :post, class: 'btn btn-outline-primary'
+      = link_to t('check'), repository_checks_path(@repository.id), method: :post, class: 'btn btn-outline-primary'
 
 - content_for :title do
   = @repository.full_name
@@ -35,10 +35,10 @@ table.table.table-striped.table-hover.mb-5
   thead
     tr
       th = '#'
-      th{ scope: :col } = 'State'
-      th{ scope: :col } = 'Reference'
-      th{ scope: :col } = 'Check passed'
-      th{ scope: :col } = 'Check created_at'
+      th{ scope: :col } = t('state')
+      th{ scope: :col } = t('reference')
+      th{ scope: :col } = t('check_passed')
+      th{ scope: :col } = t('check_created')
       th
 
   tbody
