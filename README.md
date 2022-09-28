@@ -9,5 +9,5 @@ A service where teams can track the quality of their public repositories. Reposi
 Link:
 https://av-github-quality.herokuapp.com/
 
-Attention! For the app you need to install:
-GITHUB APP av-github-quality: https://github.com/apps/av-github-quality
+Attention! For the app you need to install: 
+https://github.com/apps/av-github-quality
