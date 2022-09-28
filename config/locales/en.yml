@@ -1,5 +1,4 @@
 en:
-  attention_app: 'Attention! For the app you need to install:'
   auth_log_in: 'You need to log in'
   auth_signed: 'Successfully signed in into your account'
   auth_error: 'Error authentication!'
